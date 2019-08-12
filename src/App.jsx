@@ -28,7 +28,7 @@ class App extends Component {
     console.log("/sign up response", body);
     body = JSON.parse(body);
     if (body.success) {
-      console.log("sign -up done");
+      alert("sign -up done");
       return;
     }
     alert("use a different username");
