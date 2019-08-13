@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+<link rel="stylesheet" href="main.css" />;
 
 class App extends Component {
   constructor() {
@@ -6,9 +7,12 @@ class App extends Component {
     this.state = {
       usernameInput: "",
       passwordInput: "",
-      username: undefined
+      username: undefined 
+      
     };
   }
+  
+ 
   usernameChange = evt => {
     this.setState({ usernameInput: evt.target.value });
   };
@@ -36,11 +40,26 @@ class App extends Component {
 
   render = () => {
     return (
-      <div>
+      
+      <div id ="signup-login">
+        
         <form onSubmit={this.signUpsubmitHandler}>
-          Username <input type="text" onChange={this.usernameChange} />
-          Password <input type="text" onChange={this.passwordChange} />
-          <input type="submit" value="sign-up" />
+          Username{" "}
+          <input
+            type="text"
+            placeholder="Email address"
+            onChange={this.usernameChange}
+          />
+          Password{" "}
+          <input
+            type="text"
+            placeholder="Password"
+            onChange={this.passwordChange}
+          />
+          <input type="submit" value="login" />
+          Don't have an account yet?{" "}
+          <input type="submit" value="create one now" />
+          <div />
         </form>
       </div>
     );
