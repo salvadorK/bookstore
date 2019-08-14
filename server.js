@@ -118,10 +118,21 @@ app.get("/all-posts", (req, res) => {
             res.send(JSON.stringify(bdata));
         });
 });
-app.post("buy-item", upload.none(), (req, res) => {
+app.post("/addcart", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
     let id = req.body.id.toString()
-
-    dbo.collection("")
+    let img = req.body.img
+    let booktitle = req.body.booktitle
+    let price = req.body.price
+    dbo.collection("purchase").insertOne({
+        username,
+        booktitle,
+        img,
+        price,
+        id
+    })
+    res.send(JSON.stringify({success:true}))
 })
 app.all("/*", (req, res, next) => {
     // needed for react router
