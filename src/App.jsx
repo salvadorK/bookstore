@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import NewPost from "./NewPost.jsx";
+import Post from "./Post.jsx";
 
 class App extends Component {
   constructor() {
@@ -6,9 +8,17 @@ class App extends Component {
     this.state = {
       usernameInput: "",
       passwordInput: "",
-      username: undefined
+      username: undefined,
+      posts: []
     };
   }
+  reload = async () => {
+    let response = await fetch("/all-posts");
+    let body = await response.text();
+    body = JSON.parse(body);
+    console.log(body);
+    this.setState({ posts: body });
+  };
   usernameChange = evt => {
     this.setState({ usernameInput: evt.target.value });
   };
@@ -33,11 +43,29 @@ class App extends Component {
     }
     alert("use a different username");
   };
-
+  loginsubmitHandler = async evt => {
+    evt.preventDefault();
+    console.log("username", this.state.username);
+    console.log("password", this.state.passwordInput);
+    let name = this.state.usernameInput;
+    let data = new FormData();
+    data.append("username", name);
+    data.append("password", this.state.passwordInput);
+    let response = await fetch("/login", { method: "POST", body: data });
+    let body = await response.text();
+    console.log("/login response", body);
+    body = JSON.parse(body);
+    if (body.success) {
+      alert("login done");
+      return;
+    }
+    alert("user name and password don't match");
+  };
   render = () => {
+    this.reload();
     return (
-      <div id="signup-login" class="signup">
-        <form onSubmit={this.signUpsubmitHandler}>
+      <div id="signup-login-border" className="signup">
+        <form onSubmit={this.loginsubmitHandler}>
           <input
             type="text"
             placeholder="Username"
@@ -50,8 +78,27 @@ class App extends Component {
           />
           <input type="submit" value="login" />
         </form>
-        Don't have an account yet?
-        <input type="submit" value="sign-up" />
+
+        <form onSubmit={this.signUpsubmitHandler}>
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={this.usernameChange}
+          />
+          <input
+            type="text"
+            placeholder="Password"
+            onChange={this.passwordChange}
+          />
+          Don't have an account yet?
+          <input type="submit" value="sign-up" />
+        </form>
+
+        <div>
+          {this.state.posts.map(p => (
+            <Post contents={p} />
+          ))}
+        </div>
       </div>
     );
   };
