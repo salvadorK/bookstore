@@ -9,7 +9,6 @@ class Post extends Component {
   }
 
   render = () => {
-    console.log(this.props.contents.username);
     return (
       <div>
         <h1>booktitle is:{this.props.contents.booktitle}</h1>
