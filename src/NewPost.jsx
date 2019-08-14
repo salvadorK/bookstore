@@ -75,6 +75,7 @@ export default class NewPost extends Component {
             <input
               type="number"
               name="quantity"
+              min="1"
               onChange={this.quanChangeHandler}
             />
           </div>
@@ -84,6 +85,8 @@ export default class NewPost extends Component {
             <input
               type="number"
               name="price"
+              min="0.00"
+              step="0.01"
               onChange={this.priceChangeHandler}
             />
           </div>

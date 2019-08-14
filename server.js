@@ -103,6 +103,26 @@ app.post("/new-post", upload.single("img"), (req, res) => {
         success: true
     }));
 });
+app.get("/all-posts", (req, res) => {
+    console.log("request to /all-posts");
+    dbo
+        .collection("book-data")
+        .find({})
+        .toArray((err, bdata) => {
+            if (err) {
+                console.log("error", err);
+                res.send("fail");
+                return;
+            }
+            console.log("posts", bdata);
+            res.send(JSON.stringify(bdata));
+        });
+});
+app.post("buy-item", upload.none(), (req, res) => {
+    let id = req.body.id.toString()
+
+    dbo.collection("")
+})
 app.all("/*", (req, res, next) => {
     // needed for react router
     res.sendFile(__dirname + "/build/index.html");
