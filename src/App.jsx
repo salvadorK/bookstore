@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import NewPost from "./NewPost.jsx";
 import Post from "./Post.jsx";
-
-class App extends Component {
+import { connect } from "react-redux";
+import Search from "./Search.jsx";
+class UnconnectedApp extends Component {
   constructor() {
     super();
     this.state = {
@@ -63,6 +64,9 @@ class App extends Component {
   };
   render = () => {
     this.reload();
+    let results = this.state.posts.filter(item => {
+      return item.booktitle.includes(this.props.query);
+    });
     return (
       <div id="signup-login-border" className="signup">
         <form onSubmit={this.loginsubmitHandler}>
@@ -93,9 +97,11 @@ class App extends Component {
           Don't have an account yet?
           <input type="submit" value="sign-up" />
         </form>
-
         <div>
-          {this.state.posts.map(p => (
+          <Search />
+        </div>
+        <div>
+          {results.map(p => (
             <Post contents={p} />
           ))}
         </div>
@@ -103,5 +109,10 @@ class App extends Component {
     );
   };
 }
+let mapStateToProps = st => {
+  return { query: st.searchQuery };
+};
+
+let App = connect(mapStateToProps)(UnconnectedApp);
 
 export default App;

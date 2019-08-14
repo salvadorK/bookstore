@@ -14,7 +14,7 @@ class UnconncectedSearch extends Component {
   }
 }
 
-mapStatetoProps = st => {
+let mapStatetoProps = st => {
   return {};
 };
 let Search = connect()(UnconncectedSearch);
