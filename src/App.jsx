@@ -36,7 +36,7 @@ class App extends Component {
 
   render = () => {
     return (
-      <div id="signup-login">
+      <div id="signup-login" class="signup">
         <form onSubmit={this.signUpsubmitHandler}>
           <input
             type="text"
