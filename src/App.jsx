@@ -17,7 +17,6 @@ class UnconnectedApp extends Component {
     let response = await fetch("/all-posts");
     let body = await response.text();
     body = JSON.parse(body);
-    console.log(body);
     this.setState({ posts: body });
   };
   usernameChange = evt => {
