@@ -9,7 +9,6 @@ class App extends Component {
       username: undefined
     };
   }
-
   usernameChange = evt => {
     this.setState({ usernameInput: evt.target.value });
   };
@@ -37,25 +36,22 @@ class App extends Component {
 
   render = () => {
     return (
-      <div class="signup">
+      <div id="signup-login" class="signup">
         <form onSubmit={this.signUpsubmitHandler}>
-          Username{" "}
           <input
             type="text"
-            placeholder="Email address"
+            placeholder="Username"
             onChange={this.usernameChange}
           />
-          Password{" "}
           <input
             type="text"
             placeholder="Password"
             onChange={this.passwordChange}
           />
           <input type="submit" value="login" />
-          Don't have an account yet?{" "}
-          <input type="submit" value="create one now" />
-          <div />
         </form>
+        Don't have an account yet?
+        <input type="submit" value="sign-up" />
       </div>
     );
   };
