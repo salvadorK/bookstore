@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 
-
 class App extends Component {
   constructor() {
     super();
     this.state = {
       usernameInput: "",
       passwordInput: "",
-      username: undefined 
-      
+      username: undefined
     };
   }
-  
- 
+
   usernameChange = evt => {
     this.setState({ usernameInput: evt.target.value });
   };
@@ -40,9 +37,7 @@ class App extends Component {
 
   render = () => {
     return (
-      
-      <div id ="signup-login">
-        
+      <div class="signup">
         <form onSubmit={this.signUpsubmitHandler}>
           Username{" "}
           <input
