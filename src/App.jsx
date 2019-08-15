@@ -67,7 +67,10 @@ class UnconnectedApp extends Component {
       return item.booktitle.includes(this.props.query);
     });
     return (
-      <div id="signup-login-border" className="signup">
+      <div id="signup">
+        <ul>
+          <Search />
+        </ul>
         <form onSubmit={this.loginsubmitHandler}>
           <input
             type="text"
@@ -96,9 +99,7 @@ class UnconnectedApp extends Component {
           Don't have an account yet?
           <input type="submit" value="sign-up" />
         </form>
-        <div>
-          <Search />
-        </div>
+
         <div>
           {results.map(p => (
             <Post contents={p} />
