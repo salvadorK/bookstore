@@ -7,11 +7,11 @@ class UnconncectedSearch extends Component {
   };
   render() {
     return (
-      <div>
+      <div id="search-box-css">
         <input
           type="text"
           onChange={this.handleQuery}
-          value={this.props.query}
+          placeholder="search over 2 million products"
         />
       </div>
     );
