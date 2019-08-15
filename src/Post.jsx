@@ -7,6 +7,15 @@ class Post extends Component {
       posts: []
     };
   }
+  addcart = () => {
+    let data = new FormData();
+    data.append("booktitle", this.props.contents.booktitle);
+    data.append("price", this.props.contents.price);
+    data.append("img", this.props.contents.img);
+    data.append("id", this.props.contents._id);
+    alert("added to cart");
+    fetch("/addcart", { method: "POST", body: data });
+  };
 
   render = () => {
     return (
@@ -15,6 +24,9 @@ class Post extends Component {
         <img src={this.props.contents.img} height="100px" />
         <div>isbn:{this.props.contents.isbn}</div>
         <div>Price:{this.props.contents.price}</div>
+        <div>
+          <img src="./cart.png" height="25px" onClick={this.addcart} />
+        </div>
       </div>
     );
   };

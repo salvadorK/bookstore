@@ -104,7 +104,6 @@ app.post("/new-post", upload.single("img"), (req, res) => {
     }));
 });
 app.get("/all-posts", (req, res) => {
-    console.log("request to /all-posts");
     dbo
         .collection("book-data")
         .find({})
@@ -114,10 +113,13 @@ app.get("/all-posts", (req, res) => {
                 res.send("fail");
                 return;
             }
-            console.log("posts", bdata);
+
             res.send(JSON.stringify(bdata));
         });
 });
+app.get("/all-purchase", (req,res) => {
+    dbo.collection("purchase").find({})
+})
 app.post("/addcart", upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
     let username = sessions[sessionId]
@@ -132,7 +134,9 @@ app.post("/addcart", upload.none(), (req, res) => {
         price,
         id
     })
-    res.send(JSON.stringify({success:true}))
+    res.send(JSON.stringify({
+        success: true
+    }))
 })
 app.all("/*", (req, res, next) => {
     // needed for react router
