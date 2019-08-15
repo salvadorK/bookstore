@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: rgb(252, 247, 247);
+  background-color: rgb(14, 13, 13);
   margin: 0;
 }
 
@@ -35,6 +35,15 @@ body {
   display: block;
 }
 
+.login-signup-grid {
+  background: rgb(110, 109, 109);
+  display: block;
+  float: left;
+  border: 500px;
+  text-align: center;
+  margin: 5px;
+}
+
 .container {
   margin: auto;
   max-width: 1100px;
@@ -44,19 +53,16 @@ body {
 .container-img {
   display: grid;
   grid-template-areas: "1 2 3";
-  margin: auto;
-  max-width: 1100px;
-  overflow: auto;
-  padding: 20 10px;
 }
 
 /*Navbar*/
 #navbar {
   background: rgb(49, 49, 49);
-  color: rgb(252, 247, 247);
+  color: rgb(226, 212, 212);
   overflow: auto;
 }
 #navbar a {
+  font-family: Arial, Helvetica, sans-serif;
   color: rgb(252, 247, 247);
 }
 
@@ -92,4 +98,8 @@ a {
   margin-right: 10px;
   font-size: 1px;
   padding: 0;
+}
+
+#product {
+  display: flexbox;
 }

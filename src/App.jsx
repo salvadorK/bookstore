@@ -3,6 +3,7 @@ import NewPost from "./NewPost.jsx";
 import Post from "./Post.jsx";
 import { connect } from "react-redux";
 import Search from "./Search.jsx";
+import Signup from "./Signup.jsx";
 class UnconnectedApp extends Component {
   constructor() {
     super();
@@ -69,9 +70,10 @@ class UnconnectedApp extends Component {
     return (
       <div id="signup">
         <ul>
+          <Signup />
           <Search />
         </ul>
-        <form onSubmit={this.loginsubmitHandler}>
+        <form class="login-signup-grid" onSubmit={this.loginsubmitHandler}>
           <input
             type="text"
             placeholder="Username"
@@ -100,7 +102,7 @@ class UnconnectedApp extends Component {
           <input type="submit" value="sign-up" />
         </form>
 
-        <div>
+        <div class="container-img">
           {results.map(p => (
             <Post contents={p} />
           ))}

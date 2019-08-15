@@ -19,26 +19,12 @@ class Post extends Component {
 
   render = () => {
     return (
-<<<<<<< HEAD
-      <p id="product">
-        <div class="container-img">
-          <img src={this.props.contents.img} height="100px" width="100px" />
-          <div>booktitle is:{this.props.contents.booktitle}</div>
-          <div>isbn:{this.props.contents.isbn}</div>
-          <div>Price:{this.props.contents.price}</div>
-        </div>
-      </p>
-=======
       <div>
-        <h1>booktitle is:{this.props.contents.booktitle}</h1>
-        <img src={this.props.contents.img} height="100px" />
+        <img src={this.props.contents.img} height="320px" width="320px" />
+        <div>booktitle is:{this.props.contents.booktitle}</div>
         <div>isbn:{this.props.contents.isbn}</div>
         <div>Price:{this.props.contents.price}</div>
-        <div>
-          <img src="./cart.png" height="25px" onClick={this.addcart} />
-        </div>
       </div>
->>>>>>> 875d5009df89cdf5608170e3013253158f0a2ea5
     );
   };
 }
