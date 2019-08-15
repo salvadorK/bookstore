@@ -12,6 +12,7 @@ class UnconncectedSearch extends Component {
           type="text"
           onChange={this.handleQuery}
           placeholder="search over 2 million products"
+          value={this.props.query}
         />
       </div>
     );
