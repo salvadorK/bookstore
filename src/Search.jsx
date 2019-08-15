@@ -8,11 +8,20 @@ class UnconncectedSearch extends Component {
   render() {
     return (
       <div>
-        <input type="text" onChange={this.handleQuery} />
+        <input
+          type="text"
+          onChange={this.handleQuery}
+          value={this.props.query}
+        />
       </div>
     );
   }
 }
+let mapStateToProps = st => {
+  return {
+    query: st.searchQuery
+  };
+};
 
-let Search = connect()(UnconncectedSearch);
+let Search = connect(mapStateToProps)(UnconncectedSearch);
 export default Search;
