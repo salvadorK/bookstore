@@ -117,8 +117,14 @@ app.get("/all-posts", (req, res) => {
             res.send(JSON.stringify(bdata));
         });
 });
-app.get("/all-purchase", (req,res) => {
-    dbo.collection("purchase").find({})
+app.get("/all-purchase", (req, res) => {
+    dbo.collection("purchase").find({}).toArray((err, purc) => {
+        if (err) {
+            res.send("fail")
+            return
+        }
+        res.send(JSON.stringify(purc))
+    })
 })
 app.post("/addcart", upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
@@ -128,7 +134,7 @@ app.post("/addcart", upload.none(), (req, res) => {
     let booktitle = req.body.booktitle
     let price = req.body.price
     dbo.collection("purchase").insertOne({
-        username,
+        username: "pre" + username,
         booktitle,
         img,
         price,
@@ -137,6 +143,27 @@ app.post("/addcart", upload.none(), (req, res) => {
     res.send(JSON.stringify({
         success: true
     }))
+})
+app.post("/save-stripe-token", upload.none(), (req, res) => {
+    let token = req.body.token
+    res.send(JSON.stringify(token))
+    // dbo.collection("card-purchase").insertOne({
+    //     test
+    // })
+    // dbo.collection("card-purchase").find({}).toArray((err, card) => {
+    //     res.send(JSON.stringify(card))
+    // })
+})
+app.get("/user-prepurchase", (req, res) => {
+    // let sessionId = req.cookies.sid
+    // let username = sessions[sessionId]
+    dbo.collection("purchase").find({
+         
+    }).toArray( (err, results) => {
+
+        res.send(JSON.stringify(results))
+    })
+
 })
 app.all("/*", (req, res, next) => {
     // needed for react router

@@ -3,6 +3,7 @@ import NewPost from "./NewPost.jsx";
 import Post from "./Post.jsx";
 import { connect } from "react-redux";
 import Search from "./Search.jsx";
+import Cart from "./cart.jsx";
 class UnconnectedApp extends Component {
   constructor() {
     super();
@@ -104,6 +105,9 @@ class UnconnectedApp extends Component {
           {results.map(p => (
             <Post contents={p} />
           ))}
+        </div>
+        <div>
+          <Cart />
         </div>
       </div>
     );
