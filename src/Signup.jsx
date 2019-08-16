@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-
-export default class NewPost extends Component {
-  constructor() {
-    super();
+class Signup extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       firstname: "",
       lastname: "",
       phone: "",
-      email: "",
+      username: "",
       password: ""
     };
   }
+
   firstnameChangeHandler = e => {
     this.setState({ firstname: e.target.value });
   };
@@ -20,78 +20,54 @@ export default class NewPost extends Component {
   phoneChangeHandler = e => {
     this.setState({ phone: e.target.value });
   };
-  emailChangeHandler = e => {
-    this.setState({ email: e.target.value });
+
+  handleUsernameChange = event => {
+    console.log("new username", event.target.value);
+    this.setState({ username: event.target.value });
   };
-  passwordChangeHandler = e => {
-    this.setState({ password: e.target.value });
+  handlePasswordChange = event => {
+    console.log("new password", event.target.value);
+    this.setState({ password: event.target.value });
   };
-  submitHandler = evt => {
+
+  handleSubmit = async evt => {
     evt.preventDefault();
+    console.log("signup form submitted");
     let data = new FormData();
+    data.append("firstname", this.state.firstname);
     data.append("lastname", this.state.lastname);
     data.append("phone", this.state.phone);
-    data.append("email", this.state.email);
-    data.append("firstname", this.state.description);
+    data.append("username", this.state.username);
     data.append("password", this.state.password);
-    fetch("/sign-up", { method: "POST", body: data });
+    let response = await fetch("/sign-up", { method: "POST", body: data });
+    let responsebody = await response.text();
+    let text = JSON.parse(responsebody);
+    console.log(text.success);
+    if (text.success) {
+      alert("signup successful");
+      return;
+    }
+    alert("username taken");
   };
-  render() {
+
+  render = () => {
     return (
       <div className="popup">
-        <form onSubmit={this.submitHandler}>
-          <div>
-            <label for="firstname">First Name</label>
-            <br />
-            <input
-              type="text"
-              name="firstname"
-              onChange={this.firstnameChangeHandler}
-            />
-          </div>
-          <div>
-            <label for="lastname">Last Name</label>
-            <br />
-            <input
-              type="text"
-              name="lastname"
-              onChange={this.lastnameChangeHandler}
-            />
-          </div>
-          <div>
-            <label for="phone">Phone</label>
-            <br />
-            <input
-              type="text"
-              name="phone"
-              min="1"
-              onChange={this.phoneChangeHandler}
-            />
-          </div>
-          <div>
-            <label for="password">Password</label>
-            <br />
-            <input
-              type="test"
-              name="password"
-              onChange={this.passwordChangeHandler}
-            />
-          </div>
-          <div>
-            <label for="email">Email</label>
-            <br />
-            <input
-              type="text"
-              name="email"
-              onChange={this.emailChangeHandler}
-            />
-          </div>
-          <div>
-            <input type="submit" value="Submit" />
-            <input type="reset" />
-          </div>
+        <form onSubmit={this.handleSubmit}>
+          First Name
+          <input type="text" onChange={this.firstnameChangeHandler} />
+          Last Name
+          <input type="text" onChange={this.lastnameChangeHandler} />
+          Phone
+          <input type="text" onChange={this.phoneChangeHandler} />
+          Username
+          <input type="text" onChange={this.handleUsernameChange} />
+          Password
+          <input type="text" onChange={this.handlePasswordChange} />
+          <input type="submit" />
         </form>
       </div>
     );
-  }
+  };
 }
+export default Signup;

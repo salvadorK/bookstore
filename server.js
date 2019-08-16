@@ -15,36 +15,45 @@ reloadMagic(app);
 app.use(cookieParser());
 app.use("/", express.static("build")); // Needed for the HTML and JS files
 app.use("/uploads", express.static("uploads"));
-app.use("/", express.static("public")); // Needed for local assets
+app.use("/public", express.static("public")); // Needed for local assets
 
 let dbo = undefined;
 let url =
     "mongodb+srv://karlchikc:bobsuekc01@alibay-7bioh.mongodb.net/test?retryWrites=true&w=majority";
-MongoClient.connect(url, {
-    useNewUrlParser: true
-}, (err, db) => {
-    dbo = db.db("alibay");
-});
+MongoClient.connect(
+    url, {
+        useNewUrlParser: true
+    },
+    (err, db) => {
+        dbo = db.db("alibay");
+    }
+);
 app.post("/sign-up", upload.none(), (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     dbo.collection("users").findOne({
-        username
-    }, (err, user) => {
-        if (user) {
-            res.send(JSON.stringify({
-                success: false
-            }));
-            return;
+            username
+        },
+        (err, user) => {
+            if (user) {
+                res.send(
+                    JSON.stringify({
+                        success: false
+                    })
+                );
+                return;
+            }
+            dbo.collection("users").insertOne({
+                username,
+                password: sha1(password)
+            });
+            res.send(
+                JSON.stringify({
+                    success: true
+                })
+            );
         }
-        dbo.collection("users").insertOne({
-            username,
-            password: sha1(password)
-        });
-        res.send(JSON.stringify({
-            success: true
-        }));
-    });
+    );
 });
 app.post("/login", upload.none(), (req, res) => {
     let username = req.body.username;
@@ -85,7 +94,7 @@ app.post("/new-post", upload.single("img"), (req, res) => {
     let sessionId = req.cookies.sid;
     let description = req.body.description;
     let quantity = req.body.quantity;
-    let price = req.body.price
+    let price = req.body.price;
     let ISBN = req.body.isbn;
     let file = req.file;
     let img = "/uploads/" + file.filename;
@@ -99,9 +108,11 @@ app.post("/new-post", upload.single("img"), (req, res) => {
         price,
         img
     });
-    res.send(JSON.stringify({
-        success: true
-    }));
+    res.send(
+        JSON.stringify({
+            success: true
+        })
+    );
 });
 app.get("/all-posts", (req, res) => {
     dbo
