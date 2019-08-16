@@ -4,6 +4,9 @@ import Post from "./Post.jsx";
 import { connect } from "react-redux";
 import Search from "./Search.jsx";
 import Signup from "./Signup.jsx";
+import Login from "./Login.jsx";
+import "./main.css";
+
 class UnconnectedApp extends Component {
   constructor() {
     super();
@@ -26,24 +29,24 @@ class UnconnectedApp extends Component {
   passwordChange = evt => {
     this.setState({ passwordInput: evt.target.value });
   };
-  signUpsubmitHandler = async evt => {
-    evt.preventDefault();
-    console.log("username", this.state.username);
-    console.log("password", this.state.passwordInput);
-    let name = this.state.usernameInput;
-    let data = new FormData();
-    data.append("username", name);
-    data.append("password", this.state.passwordInput);
-    let response = await fetch("/sign-up", { method: "POST", body: data });
-    let body = await response.text();
-    console.log("/sign up response", body);
-    body = JSON.parse(body);
-    if (body.success) {
-      alert("sign -up done");
-      return;
-    }
-    alert("use a different username");
-  };
+  // signUpsubmitHandler = async evt => {
+  //   evt.preventDefault();
+  //   console.log("username", this.state.username);
+  //   console.log("password", this.state.passwordInput);
+  //   let name = this.state.usernameInput;
+  //   let data = new FormData();
+  //   data.append("username", name);
+  //   data.append("password", this.state.passwordInput);
+  //   let response = await fetch("/sign-up", { method: "POST", body: data });
+  //   let body = await response.text();
+  //   console.log("/sign up response", body);
+  //   body = JSON.parse(body);
+  //   if (body.success) {
+  //     alert("sign -up done");
+  //     return;
+  //   }
+  //   alert("use a different username");
+  // };
   loginsubmitHandler = async evt => {
     evt.preventDefault();
     console.log("username", this.state.username);
@@ -69,10 +72,11 @@ class UnconnectedApp extends Component {
     });
     return (
       <div id="signup">
-        <ul>
-          <Signup />
+        <div>
+          {/* <Signup /> */}
+          {/* <Login /> */}
           <Search />
-        </ul>
+        </div>
         <form class="login-signup-grid" onSubmit={this.loginsubmitHandler}>
           <input
             type="text"
@@ -86,7 +90,7 @@ class UnconnectedApp extends Component {
           />
           <input type="submit" value="login" />
         </form>
-
+        {/* 
         <form onSubmit={this.signUpsubmitHandler}>
           <input
             type="text"
@@ -100,7 +104,7 @@ class UnconnectedApp extends Component {
           />
           Don't have an account yet?
           <input type="submit" value="sign-up" />
-        </form>
+        </form> */}
 
         <div class="container-img">
           {results.map(p => (
