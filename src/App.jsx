@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewPost from "./NewPost.jsx";
 import Post from "./Post.jsx";
 import { connect } from "react-redux";
-import Search from "./Search.jsx"; a
+import Search from "./Search.jsx";
 import Signup from "./Signup.jsx";
 class UnconnectedApp extends Component {
   constructor() {
