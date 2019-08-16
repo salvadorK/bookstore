@@ -144,6 +144,7 @@ app.get("/all-posts", (req, res) => {
 app.get("/all-purchase", (req, res) => {
   dbo.collection("purchase").find({});
 });
+<<<<<<< HEAD
 app.post("/addcart", upload.none(), (req, res) => {
   let sessionId = req.cookies.sid;
   let username = sessions[sessionId];
@@ -164,6 +165,56 @@ app.post("/addcart", upload.none(), (req, res) => {
     })
   );
 });
+=======
+app.get("/all-purchase", (req, res) => {
+    dbo.collection("purchase").find({}).toArray((err, purc) => {
+        if (err) {
+            res.send("fail")
+            return
+        }
+        res.send(JSON.stringify(purc))
+    })
+})
+app.post("/addcart", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+    let id = req.body.id.toString()
+    let img = req.body.img
+    let booktitle = req.body.booktitle
+    let price = req.body.price
+    dbo.collection("purchase").insertOne({
+        username: "pre" + username,
+        booktitle,
+        img,
+        price,
+        id
+    })
+    res.send(JSON.stringify({
+        success: true
+    }))
+})
+app.post("/save-stripe-token", upload.none(), (req, res) => {
+    let token = req.body.token
+    res.send(JSON.stringify(token))
+    // dbo.collection("card-purchase").insertOne({
+    //     test
+    // })
+    // dbo.collection("card-purchase").find({}).toArray((err, card) => {
+    //     res.send(JSON.stringify(card))
+    // })
+})
+app.get("/user-prepurchase", (req, res) => {
+    // let sessionId = req.cookies.sid
+    // let username = sessions[sessionId]
+    dbo.collection("purchase").find({
+         
+    }).toArray( (err, results) => {
+
+        res.send(JSON.stringify(results))
+    })
+
+})
+>>>>>>> 65225154f8658d14f7af2c7a67431a7536bcc7f2
 app.all("/*", (req, res, next) => {
   // needed for react router
   res.sendFile(__dirname + "/build/index.html");

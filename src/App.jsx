@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NewPost from "./NewPost.jsx";
 import Post from "./Post.jsx";
 import { connect } from "react-redux";
-import Search from "./Search.jsx";
+import Search from "./Search.jsx"; a
 import Signup from "./Signup.jsx";
 import Login from "./Login.jsx";
 import "./main.css";
