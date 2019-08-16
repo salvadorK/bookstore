@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import NewPost from "./NewPost.jsx";
 import Post from "./Post.jsx";
 import { connect } from "react-redux";
-import Search from "./Search.jsx"; a
+import Search from "./Search.jsx";
+a;
 import Signup from "./Signup.jsx";
 import Login from "./Login.jsx";
 import "./main.css";
@@ -73,8 +74,8 @@ class UnconnectedApp extends Component {
     return (
       <div id="signup">
         <div>
-          {/* <Signup /> */}
-          {/* <Login /> */}
+          <Signup />
+          <Login />
           <Search />
         </div>
         <form class="login-signup-grid" onSubmit={this.loginsubmitHandler}>
