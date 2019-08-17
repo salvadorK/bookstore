@@ -6,6 +6,11 @@ import Search from "./Search.jsx";
 import Signup from "./Signup.jsx";
 import Login from "./Login.jsx";
 import "./main.css";
+
+import StripeCheckout from "react-stripe-checkout";
+import Cartlist from "./cart-list.jsx";
+import Cart from "./cart.jsx";
+
 // import { BrowserRouter, Route, Link } from "react-router-dom";
 
 class UnconnectedApp extends Component {
@@ -84,6 +89,10 @@ class UnconnectedApp extends Component {
     return (
       <div id="signup">
         <div>
+          <Cart />
+          {/* <StripeCheckout />
+          
+          <Cartlist /> */}
           {/* <NewPost /> */}
           {/* <Signup />
           <Login />
