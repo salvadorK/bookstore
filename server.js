@@ -142,9 +142,6 @@ app.get("/all-posts", (req, res) => {
     });
 });
 app.get("/all-purchase", (req, res) => {
-  dbo.collection("purchase").find({});
-});
-app.get("/all-purchase", (req, res) => {
   dbo
     .collection("purchase")
     .find({})
@@ -163,19 +160,40 @@ app.post("/addcart", upload.none(), (req, res) => {
   let img = req.body.img;
   let booktitle = req.body.booktitle;
   let price = req.body.price;
-  dbo.collection("purchase").insertOne({
-    username: "pre" + username,
-    booktitle,
-    img,
-    price,
-    id
-  });
+  dbo.collection("purchase").findOne(
+    {
+      username: username
+    },
+    (err, purc) => {
+      if (purc.booktitle === booktitle) {
+        dbo.collection("purchase").updateOne(
+          {
+            _id: ObjectID(id)
+          },
+          {
+            $set: {
+              qty: purc.qty + 1
+            }
+          }
+        );
+        return;
+      }
+      dbo.collection("purchase").insertOne({
+        username,
+        booktitle,
+        img,
+        price,
+        quantity: 1
+      });
+    }
+  );
   res.send(
     JSON.stringify({
       success: true
     })
   );
 });
+
 app.post("/save-stripe-token", upload.none(), (req, res) => {
   let token = req.body.token;
   res.send(JSON.stringify(token));
