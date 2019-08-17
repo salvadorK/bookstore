@@ -176,7 +176,7 @@ app.post("/addcart", upload.none(), (req, res) => {
                 }
             })
             res.send(JSON.stringify({
-                success: false
+                success: true
             }))
             return
         }
