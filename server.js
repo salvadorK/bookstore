@@ -144,30 +144,42 @@ app.post("/addcart", upload.none(), (req, res) => {
     let img = req.body.img
     let booktitle = req.body.booktitle
     let price = req.body.price
+    console.log(sessions)
+    if (!sessionId) {
+        res.send(JSON.stringify({
+            success: false
+        }))
+        return
+    }
     dbo.collection("purchase").findOne({
-        username: username
+        username: username,
+        booktitle: booktitle
     }, (err, purc) => {
-        if (purc.booktitle === booktitle) {
+        if (purc && purc.booktitle === booktitle) {
             dbo.collection("purchase").updateOne({
-                _id: ObjectID(id)
+                booktitle: booktitle
             }, {
                 $set: {
                     qty: purc.qty + 1
                 }
             })
+            res.send(JSON.stringify({
+                success: false
+            }))
             return
         }
         dbo.collection("purchase").insertOne({
             username,
             booktitle,
             img,
-            price,
-            quantity: 1
+            price: +price,
+            qty: 1
         })
+        res.send(JSON.stringify({
+            success: true
+        }))
+
     })
-    res.send(JSON.stringify({
-        success: true
-    }))
 })
 
 app.post("/save-stripe-token", upload.none(), (req, res) => {

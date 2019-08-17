@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Cartlist extends Component {
   constructor(props) {
     super(props);
-    this.state = { qty: 1 };
+    this.state = { qty: this.props.contents.qty };
   }
   quantity = e => {
     this.setState({ qty: e.target.value });
@@ -16,7 +16,11 @@ export default class Cartlist extends Component {
           <h4>{this.props.contents.booktitle}</h4>
           <div>
             <form>
-              <input type="number" defaultValue="1" onChange={this.quantity} />
+              <input
+                type="number"
+                defaultValue={this.props.contents.qty}
+                onChange={this.quantity}
+              />
             </form>
           </div>
           <div>

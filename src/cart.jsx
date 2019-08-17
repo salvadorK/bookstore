@@ -9,6 +9,15 @@ export default class Cart extends Component {
       posts: []
     };
   }
+  componentDidMount() {
+    this.reload();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.posts !== this.state.posts) {
+      this.reload();
+    }
+  }
+
   onToken = token => {
     let data = new FormData();
     data.append("token", JSON.stringify(token));
@@ -28,7 +37,6 @@ export default class Cart extends Component {
     this.setState({ posts: body });
   };
   render() {
-    this.reload();
     return (
       <div>
         <div>
