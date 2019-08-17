@@ -205,15 +205,67 @@ app.post("/save-stripe-token", upload.none(), (req, res) => {
     // })
 });
 app.get("/user-prepurchase", (req, res) => {
-    // let sessionId = req.cookies.sid
-    // let username = sessions[sessionId]
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+
     dbo
         .collection("purchase")
-        .find({})
-        .toArray((err, results) => {
-            res.send(JSON.stringify(results));
-        });
+        .find({}).toArray(function (err, results) {
+
+            if (username) {
+                let books = results.filter(x => (x.username === username))
+                res.send(JSON.stringify(books))
+                return
+            }
+            res.send(JSON.stringify(false))
+        })
+    // .findOne({
+    //     username
+    // }, (err, results) => {
+    //     if (err) {
+    //         throw err;
+    //     } else if (results) {
+    //         res.send(JSON.stringify(results));
+    //     } else {
+    //         res.send(JSON.stringify(
+    //             false
+    //         ))
+    //     }
+    // });
 });
+app.post("/updatepurchase", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+    let booktitle = req.body.booktitle
+    let qty = req.body.qty
+    dbo.collection("purchase").findOne({
+        username: username,
+        booktitle: booktitle
+    }, (err, purc) => {
+        if (purc && purc.booktitle === booktitle) {
+            dbo.collection("purchase").updateOne({
+                booktitle: booktitle
+            }, {
+                $set: {
+                    qty: +qty
+                }
+            })
+        }
+    })
+})
+app.post("/deleteOne", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+    let booktitle = req.body.booktitle
+    dbo.collection("purchase").deleteOne({
+        username,
+        booktitle
+    }, (err, obj) => {
+
+    })
+})
+
+
 app.all("/*", (req, res, next) => {
     // needed for react router
     res.sendFile(__dirname + "/build/index.html");
