@@ -4,6 +4,7 @@ import Post from "./Post.jsx";
 import { connect } from "react-redux";
 import Search from "./Search.jsx";
 import Signup from "./Signup.jsx";
+import Cart from "./cart.jsx";
 import Login from "./Login.jsx";
 import "./main.css";
 
@@ -39,6 +40,11 @@ class UnconnectedApp extends Component {
     body = JSON.parse(body);
     this.setState({ posts: body });
   };
+
+  componentDidMount() {
+    this.reload();
+  }
+
   usernameChange = evt => {
     this.setState({ usernameInput: evt.target.value });
   };
@@ -82,7 +88,6 @@ class UnconnectedApp extends Component {
     alert("user name and password don't match");
   };
   render = () => {
-    this.reload();
     let results = this.state.posts.filter(item => {
       return item.booktitle.includes(this.props.query);
     });

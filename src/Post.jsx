@@ -9,14 +9,21 @@ class Post extends Component {
       posts: []
     };
   }
-  addcart = () => {
+  addcart = async () => {
     let data = new FormData();
     data.append("booktitle", this.props.contents.booktitle);
     data.append("price", this.props.contents.price);
     data.append("img", this.props.contents.img);
     data.append("id", this.props.contents._id);
+    let response = await fetch("/addcart", { method: "POST", body: data });
+    let responsebody = await response.text();
+    let text = JSON.parse(responsebody);
+    console.log(text.success);
+    if (!text.success) {
+      alert("please login");
+      return;
+    }
     alert("added to cart");
-    fetch("/addcart", { method: "POST", body: data });
   };
 
   render = () => {
