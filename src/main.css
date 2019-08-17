@@ -29,20 +29,21 @@ body {
 }
 
 #signup {
-  /* background-color: rgb(63, 58, 58); */
+  /* background-color: rgb(236, 19, 19); */
   color: rgb(37, 37, 37);
   overflow: auto;
-  border: 200px rgb(190, 15, 15);
+  border: 200px rgb(240, 233, 233);
   display: block;
+  z-index: 500;
 }
 
 .login-signup-grid {
-  background: rgb(110, 109, 109);
+  background: rgb(252, 249, 249);
   display: block;
-  float: left;
   border: 500px;
-  text-align: center;
-  margin: 5px;
+  /* text-align: center; */
+  margin: 0px;
+  margin-top: 50px;
 }
 
 .container {
@@ -54,7 +55,10 @@ body {
 .container-img {
   display: grid;
   grid-template-areas: "1 2 3";
-  background-color: #fff;
+  background-color: rgb(250, 246, 246);
+  grid-row-gap: 5px;
+  padding: 10px;
+  grid-gap: 20px;
 }
 
 img {
@@ -115,17 +119,17 @@ a {
   padding: 0;
 }
 
-#product {
+/* #product {
   display: flexbox;
-}
+} */
 
 /* Showcase */
 #showcase:before {
   color: #fff;
-  background: rgb(75, 74, 74);
+  background: rgb(228, 7, 7);
   padding: 2rem;
   position: relative;
-  z-index: -200;
+  z-index: -20;
 }
 
 #showcase:before {
@@ -136,5 +140,21 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.7;
+}
+
+.category h1 {
+  width: 100%;
+  height: 100%;
+}
+
+.add-to-cart-button__primary {
+  background: none;
+  height: 30px;
+  width: 30px;
+  border: none;
+  cursor: pointer;
+}
+.add-to-cart-button__primary:focus {
+  outline: none;
 }

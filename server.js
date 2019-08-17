@@ -59,34 +59,44 @@ app.post("/login", upload.none(), (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     dbo.collection("users").findOne({
-        username: username
-    }, (err, user) => {
-        if (err) {
-            console.log("/login error", err);
-            res.send(JSON.stringify({
-                success: false
-            }));
-            return;
+            username: username
+        },
+        (err, user) => {
+            if (err) {
+                console.log("/login error", err);
+                res.send(
+                    JSON.stringify({
+                        success: false
+                    })
+                );
+                return;
+            }
+            if (user === null) {
+                res.send(
+                    JSON.stringify({
+                        success: false
+                    })
+                );
+            }
+            if (user.password === sha1(password)) {
+                let sessionId = "" + Math.floor(Math.random() * 1000000);
+                sessions[sessionId] = req.body.username;
+                res.cookie("sid", sessionId);
+                res.send(
+                    JSON.stringify({
+                        success: true
+                    })
+                );
+                console.log("session", sessions);
+                return;
+            }
+            res.send(
+                JSON.stringify({
+                    success: false
+                })
+            );
         }
-        if (user === null) {
-            res.send(JSON.stringify({
-                success: false
-            }));
-        }
-        if (user.password === sha1(password)) {
-            let sessionId = "" + Math.floor(Math.random() * 1000000);
-            sessions[sessionId] = req.body.username;
-            res.cookie("sid", sessionId);
-            res.send(JSON.stringify({
-                success: true
-            }));
-            console.log("session", sessions);
-            return;
-        }
-        res.send(JSON.stringify({
-            success: false
-        }));
-    });
+    );
 });
 
 app.post("/new-post", upload.single("img"), (req, res) => {
@@ -129,23 +139,25 @@ app.get("/all-posts", (req, res) => {
         });
 });
 app.get("/all-purchase", (req, res) => {
-    dbo.collection("purchase").find({}).toArray((err, purc) => {
-        if (err) {
-            res.send("fail")
-            return
-        }
-        res.send(JSON.stringify(purc))
-    })
-})
+    dbo
+        .collection("purchase")
+        .find({})
+        .toArray((err, purc) => {
+            if (err) {
+                res.send("fail");
+                return;
+            }
+            res.send(JSON.stringify(purc));
+        });
+});
 app.post("/addcart", upload.none(), (req, res) => {
     let sessionId = req.cookies.sid
     let username = sessions[sessionId]
-    let id = req.body.id.toString()
     let img = req.body.img
     let booktitle = req.body.booktitle
     let price = req.body.price
-    console.log(sessions)
-    if (!sessionId) {
+    console.log(username)
+    if (username === undefined) {
         res.send(JSON.stringify({
             success: false
         }))
@@ -183,26 +195,25 @@ app.post("/addcart", upload.none(), (req, res) => {
 })
 
 app.post("/save-stripe-token", upload.none(), (req, res) => {
-    let token = req.body.token
-    res.send(JSON.stringify(token))
+    let token = req.body.token;
+    res.send(JSON.stringify(token));
     // dbo.collection("card-purchase").insertOne({
     //     test
     // })
     // dbo.collection("card-purchase").find({}).toArray((err, card) => {
     //     res.send(JSON.stringify(card))
     // })
-})
+});
 app.get("/user-prepurchase", (req, res) => {
     // let sessionId = req.cookies.sid
     // let username = sessions[sessionId]
-    dbo.collection("purchase").find({
-
-    }).toArray((err, results) => {
-
-        res.send(JSON.stringify(results))
-    })
-
-})
+    dbo
+        .collection("purchase")
+        .find({})
+        .toArray((err, results) => {
+            res.send(JSON.stringify(results));
+        });
+});
 app.all("/*", (req, res, next) => {
     // needed for react router
     res.sendFile(__dirname + "/build/index.html");

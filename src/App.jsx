@@ -7,6 +7,7 @@ import Signup from "./Signup.jsx";
 import Cart from "./cart.jsx";
 import Login from "./Login.jsx";
 import "./main.css";
+// import { BrowserRouter, Route, Link } from "react-router-dom";
 
 class UnconnectedApp extends Component {
   constructor() {
@@ -18,6 +19,16 @@ class UnconnectedApp extends Component {
       posts: []
     };
   }
+  //Beginning -- Will prevent from reloading when there is no change to the cart
+  componentDidMount() {
+    this.reload();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.posts !== this.state.posts) {
+      this.reload();
+    }
+  }
+  // End --Will prevent from reloading when there is no change to the cart
   reload = async () => {
     let response = await fetch("/all-posts");
     let body = await response.text();
@@ -78,10 +89,12 @@ class UnconnectedApp extends Component {
     return (
       <div id="signup">
         <div>
-          <Signup />
-          {/* <Login /> */}
-          <Search />
+          {/* <NewPost /> */}
+          {/* <Signup />
+          <Login />
+          <Search /> */}
         </div>
+
         <form class="login-signup-grid" onSubmit={this.loginsubmitHandler}>
           <input
             type="text"
@@ -95,6 +108,7 @@ class UnconnectedApp extends Component {
           />
           <input type="submit" value="login" />
         </form>
+
         {/* 
         <form onSubmit={this.signUpsubmitHandler}>
           <input
@@ -120,6 +134,7 @@ class UnconnectedApp extends Component {
     );
   };
 }
+
 let mapStateToProps = st => {
   return { query: st.searchQuery };
 };
