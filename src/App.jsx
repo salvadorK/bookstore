@@ -10,7 +10,6 @@ import "./main.css";
 
 import StripeCheckout from "react-stripe-checkout";
 import Cartlist from "./cart-list.jsx";
-import Cart from "./cart.jsx";
 
 // import { BrowserRouter, Route, Link } from "react-router-dom";
 
