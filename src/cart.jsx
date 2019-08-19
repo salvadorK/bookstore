@@ -42,6 +42,10 @@ export default class Cart extends Component {
     });
   };
 
+  clear() {
+    fetch("/clear",{method: "POST"})
+  }
+
   render() {
     let state = this.state.posts;
     let results = !state[0]
@@ -57,6 +61,11 @@ export default class Cart extends Component {
       <div>
         <div>{results}</div>
         <div>Total is ${numArr}</div>
+        <div>
+          <form>
+            <input type="button" onClick={this.clear} value="clear cart" />
+          </form>
+        </div>
         <StripeCheckout
           token={this.onToken}
           stripeKey="pk_test_zbiNciQsHQOG0nNhUebQtTUY00KqyFosNe"

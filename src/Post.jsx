@@ -15,6 +15,7 @@ class Post extends Component {
     data.append("price", this.props.contents.price);
     data.append("img", this.props.contents.img);
     data.append("id", this.props.contents._id);
+    data.append("qty", this.props.contents.qty)
     let response = await fetch("/addcart", { method: "POST", body: data });
     let responsebody = await response.text();
     let text = JSON.parse(responsebody);

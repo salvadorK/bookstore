@@ -7,7 +7,7 @@ export default class NewPost extends Component {
       file: "",
       description: "",
       booktitle: "",
-      quantity: 0,
+      qty: 0,
       isbn: "",
       price: ""
     };
@@ -22,7 +22,7 @@ export default class NewPost extends Component {
     this.setState({ booktitle: e.target.value });
   };
   quanChangeHandler = e => {
-    this.setState({ quantity: e.target.value });
+    this.setState({ qty: e.target.value });
   };
   isbnChangeHandler = e => {
     this.setState({ isbn: e.target.value });
@@ -35,7 +35,7 @@ export default class NewPost extends Component {
     let data = new FormData();
     data.append("img", this.state.file);
     data.append("booktitle", this.state.booktitle);
-    data.append("quantity", this.state.quantity);
+    data.append("qty", this.state.qty);
     data.append("isbn", this.state.isbn);
     data.append("description", this.state.description);
     data.append("price", this.state.price);

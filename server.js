@@ -103,7 +103,7 @@ app.post("/new-post", upload.single("img"), (req, res) => {
     let booktitle = req.body.booktitle;
     let sessionId = req.cookies.sid;
     let description = req.body.description;
-    let quantity = req.body.quantity;
+    let qty = req.body.qty;
     let price = req.body.price;
     let ISBN = req.body.isbn;
     let file = req.file;
@@ -112,7 +112,7 @@ app.post("/new-post", upload.single("img"), (req, res) => {
     dbo.collection("book-data").insertOne({
         booktitle,
         description,
-        quantity,
+        qty,
         ISBN,
         username,
         price,
@@ -156,6 +156,8 @@ app.post("/addcart", upload.none(), (req, res) => {
     let img = req.body.img
     let booktitle = req.body.booktitle
     let price = req.body.price
+    let qty = req.body.qty
+    let dop = new Date().toLocaleString()
     console.log(username)
     if (username === undefined) {
         res.send(JSON.stringify({
@@ -175,6 +177,13 @@ app.post("/addcart", upload.none(), (req, res) => {
                     qty: purc.qty + 1
                 }
             })
+            dbo.collection("book-data").updateOne({
+                booktitle: booktitle
+            }, {
+                $set: {
+                    qty: qty - 1
+                }
+            })
             res.send(JSON.stringify({
                 success: true
             }))
@@ -185,7 +194,15 @@ app.post("/addcart", upload.none(), (req, res) => {
             booktitle,
             img,
             price: +price,
-            qty: 1
+            qty: 1,
+            DOP: dop
+        })
+        dbo.collection("book-data").updateOne({
+            booktitle: booktitle
+        }, {
+            $set: {
+                qty: qty - 1
+            }
         })
         res.send(JSON.stringify({
             success: true
@@ -196,6 +213,18 @@ app.post("/addcart", upload.none(), (req, res) => {
 
 app.post("/save-stripe-token", upload.none(), (req, res) => {
     let token = req.body.token;
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+    dbo.collection("purchase").updateMany({
+        username
+    }, {
+        $set: {
+            username: "post" + username
+        }
+    }, function (err, res) {
+        if (err) throw err;
+        console.log(res.result.nModified + " document(s) updated");
+    })
     res.send(JSON.stringify(token));
     // dbo.collection("card-purchase").insertOne({
     //     test
@@ -250,6 +279,18 @@ app.post("/updatepurchase", upload.none(), (req, res) => {
                     qty: +qty
                 }
             })
+            dbo.collection("book-data").findOne({
+                booktitle
+            }, (err, bdata) => {
+                dbo.collection("book-data").updateOne({
+                    booktitle: booktitle
+                }, {
+                    $set: {
+                        qty: bdata.qty - qty
+                    }
+                })
+            })
+
         }
     })
 })
@@ -262,6 +303,13 @@ app.post("/deleteOne", upload.none(), (req, res) => {
         booktitle
     }, (err, obj) => {
 
+    })
+})
+app.post("/clear", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+    dbo.collection("purchase").deleteMany({
+        username
     })
 })
 
