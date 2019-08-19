@@ -238,9 +238,7 @@ app.get("/user-prepurchase", (req, res) => {
     let username = sessions[sessionId]
 
     dbo
-        .collection("purchase")
-        .find({}).toArray(function (err, results) {
-
+        .collection("purchase").find({}).toArray(function (err, results) {
             if (username) {
                 let books = results.filter(x => (x.username === username))
                 res.send(JSON.stringify(books))
