@@ -28,21 +28,44 @@ class Post extends Component {
 
   render = () => {
     return (
-      <div>
-        <img src={this.props.contents.img} height="320px" width="320px" />
-        <div>booktitle is:{this.props.contents.booktitle}</div>
-        <div>isbn:{this.props.contents.isbn}</div>
-        <div>Price:{this.props.contents.price}</div>
-        <button
-          type="submit"
-          onClick={this.addcart}
-          id="add-to-cart-button"
-          data-a8n="item-page__button-add-to-cart"
-          className="common-button add-to-cart-button__primary "
-        >
-          <img src="public/cart.png" />
-        </button>
-      </div>
+      <section id="kids-books" class="py-2">
+        {/* <h2>Employee Picks</h2> */}
+
+        <div class="container">
+          <div class="products-container">
+            <product class="card">
+              <img class="img-size" src={this.props.contents.img} />
+              <h3 class="text-primary">{this.props.contents.booktitle}</h3>
+              <div>isbn:{this.props.contents.isbn}</div>
+              <div>Price:{this.props.contents.price}</div>
+              <button
+                type="submit"
+                onClick={this.addcart}
+                id="add-to-cart-button"
+                data-a8n="item-page__button-add-to-cart"
+                className="common-button add-to-cart-button__primary "
+              >
+                <img src="public/cart.png" />
+              </button>
+            </product>
+          </div>
+        </div>
+      </section>
+      // <div >
+      //   <img src={this.props.contents.img} height="320px" width="320px" />
+      //   <div>booktitle is:{this.props.contents.booktitle}</div>
+      //   <div>isbn:{this.props.contents.isbn}</div>
+      //   <div>Price:{this.props.contents.price}</div>
+      //   <button
+      //     type="submit"
+      //     onClick={this.addcart}
+      //     id="add-to-cart-button"
+      //     data-a8n="item-page__button-add-to-cart"
+      //     className="common-button add-to-cart-button__primary "
+      //   >
+      //     <img src="public/cart.png" />
+      //   </button>
+      // </div>
     );
   };
 }

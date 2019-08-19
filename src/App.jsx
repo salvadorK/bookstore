@@ -7,6 +7,8 @@ import Signup from "./Signup.jsx";
 import Cart from "./cart.jsx";
 import Login from "./Login.jsx";
 import "./main.css";
+import Navbar from "./Navbar.jsx";
+import Spopup from "./Spopup.jsx";
 
 import StripeCheckout from "react-stripe-checkout";
 import Cartlist from "./cart-list.jsx";
@@ -20,13 +22,21 @@ class UnconnectedApp extends Component {
       usernameInput: "",
       passwordInput: "",
       username: undefined,
-      posts: []
+      posts: [],
+      showPopup: false
     };
   }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
+
   //Beginning -- Will prevent from reloading when there is no change to the cart
   componentDidMount() {
     this.reload();
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.posts !== this.state.posts) {
       this.reload();
@@ -93,16 +103,68 @@ class UnconnectedApp extends Component {
     return (
       <div id="signup">
         <div>
-          <Cart />
+          <nav class="navbar">
+            <div class="container">
+              <h1 class="logo">
+                <a href="index.html">Bookstore</a>
+                {/* <h2>
+                  <Search />
+                </h2> */}
+              </h1>
+              {/* <Signup /> */}
+              <ul>
+                {/* <Login /> */}
+
+                <li>
+                  <h2 class="search" />
+                  <Search />
+                </li>
+                <li>
+                  <a href="buy.html">Buy</a>
+                </li>
+                <li>
+                  <a href="sell.html">Sell</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          {/* Showcase */}
+          <header id="showcase">
+            <div class="container">
+              <div class="showcase-container">
+                <div class="showcase-content">
+                  <div class="category-kids">Kids</div>
+                  <h1>
+                    <span class="text-primary">BOOKS</span> FOR NEW BEGINNINGS
+                  </h1>
+                  <p class="lead">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Cum quaerat quae natus distinctio corrupti cupiditate
+                    architecto, voluptatem ratione temporibus reiciendis!
+                  </p>
+                  <a
+                    href="articles.html"
+                    class="btn
+                  btn-primary"
+                  >
+                    More details
+                  </a>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* <Search /> */}
+          {/* <Navbar /> */}
+          {/* <Login /> */}
+          {/* <Cart /> */}
           {/* <StripeCheckout />
           
           <Cartlist /> */}
           {/* <NewPost /> */}
-          {/* <Signup />
-          <Login />
-          <Search /> */}
-        </div>
-
+          {/* <Signup /> */}
+          {/* </div> */}
+          {/* 
         <form class="login-signup-grid" onSubmit={this.loginsubmitHandler}>
           <input
             type="text"
@@ -115,9 +177,9 @@ class UnconnectedApp extends Component {
             onChange={this.passwordChange}
           />
           <input type="submit" value="login" />
-        </form>
+        </form> */}
 
-        {/* 
+          {/* 
         <form onSubmit={this.signUpsubmitHandler}>
           <input
             type="text"
@@ -132,11 +194,17 @@ class UnconnectedApp extends Component {
           Don't have an account yet?
           <input type="submit" value="sign-up" />
         </form> */}
-
-        <div class="container-img">
-          {results.map(p => (
-            <Post contents={p} />
-          ))}
+          <div>
+            <button onClick={this.togglePopup.bind(this)}>Click here</button>
+            {this.state.showPopup ? (
+              <Spopup closePopup={this.togglePopup.bind(this)} />
+            ) : null}
+          </div>
+          <div class="container-img">
+            {results.map(p => (
+              <Post contents={p} />
+            ))}
+          </div>
         </div>
       </div>
     );
