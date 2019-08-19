@@ -1,6 +1,7 @@
 import React from "react";
 import "./main.css";
 import Signup from "./Signup.jsx";
+import Login from "./Login.jsx";
 
 class Spopup extends React.Component {
   render() {
@@ -9,7 +10,8 @@ class Spopup extends React.Component {
         <div className="spopup-inner">
           <h1>{this.props.text}</h1>
           <Signup />
-          <button onClick={this.props.ClosePopup}>close me</button>
+          <Login />
+          <button onClick={this.props.closePopup}>close me</button>
         </div>
       </div>
     );

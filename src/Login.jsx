@@ -16,7 +16,7 @@ class UnconnectedLogin extends Component {
     console.log("new password", event.target.value);
     this.setState({ password: event.target.value });
   };
-  handleSubmit = async evt => {
+  handleLoginSubmit = async evt => {
     evt.preventDefault();
     console.log("login form submitted");
     let data = new FormData();
@@ -35,27 +35,32 @@ class UnconnectedLogin extends Component {
       alert("login failed");
       return;
     }
+    alert("login - success");
+    console.log(this.state.username);
     this.props.dispatch({
-      type: "login-success"
+      type: "login-success",
+      loggedIn: this.state.username
     });
   };
   render = () => {
     return (
-      <form onSubmit={this.handleSubmit}>
-        {/* Username */}
-        <input
-          type="text"
-          placeholder="Username"
-          onChange={this.handleUsernameChange}
-        />
-        {/* Password */}
-        <input
-          type="text"
-          placeholder="Password"
-          onChange={this.handlePasswordChange}
-        />
-        <input type="submit" />
-      </form>
+      <div class="popup">
+        <form class="registration-form" onSubmit={this.handleLoginSubmit}>
+          {/* Username */}
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={this.handleUsernameChange}
+          />
+          {/* Password */}
+          <input
+            type="text"
+            placeholder="Password"
+            onChange={this.handlePasswordChange}
+          />
+          <input type="submit" value="login" />
+        </form>
+      </div>
     );
   };
 }

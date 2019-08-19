@@ -32,6 +32,13 @@ class UnconnectedApp extends Component {
     });
   }
 
+  selltoggle = evt => {
+    evt.preventDefault();
+    this.posts.loggedIn === ""
+      ? alert(" You are logged in " + this.posts.loggedIn)
+      : this.togglePopup.bind(this);
+  };
+
   //Beginning -- Will prevent from reloading when there is no change to the cart
   componentDidMount() {
     this.reload();
@@ -54,12 +61,12 @@ class UnconnectedApp extends Component {
     this.reload();
   }
 
-  usernameChange = evt => {
-    this.setState({ usernameInput: evt.target.value });
-  };
-  passwordChange = evt => {
-    this.setState({ passwordInput: evt.target.value });
-  };
+  // usernameChange = evt => {
+  //   this.setState({ usernameInput: evt.target.value });
+  // };
+  // passwordChange = evt => {
+  //   this.setState({ passwordInput: evt.target.value });
+  // };
   // signUpsubmitHandler = async evt => {
   //   evt.preventDefault();
   //   console.log("username", this.state.username);
@@ -78,28 +85,38 @@ class UnconnectedApp extends Component {
   //   }
   //   alert("use a different username");
   // };
-  loginsubmitHandler = async evt => {
-    evt.preventDefault();
-    console.log("username", this.state.username);
-    console.log("password", this.state.passwordInput);
-    let name = this.state.usernameInput;
-    let data = new FormData();
-    data.append("username", name);
-    data.append("password", this.state.passwordInput);
-    let response = await fetch("/login", { method: "POST", body: data });
-    let body = await response.text();
-    console.log("/login response", body);
-    body = JSON.parse(body);
-    if (body.success) {
-      alert("login done");
-      return;
-    }
-    alert("user name and password don't match");
-  };
+  // loginsubmitHandler = async evt => {
+  //   evt.preventDefault();
+  //   console.log("username", this.state.username);
+  //   console.log("password", this.state.passwordInput);
+  //   let name = this.state.usernameInput;
+  //   let data = new FormData();
+  //   data.append("username", name);
+  //   data.append("password", this.state.passwordInput);
+  //   let response = await fetch("/login", { method: "POST", body: data });
+  //   let body = await response.text();
+  //   console.log("/login response", body);
+  //   body = JSON.parse(body);
+  //   if (body.success) {
+  //     alert("login done");
+  //     return;
+  //   }
+  //   alert("user name and password don't match");
+  // };
   render = () => {
-    let results = this.state.posts.filter(item => {
-      return item.booktitle.includes(this.props.query);
+    let seller = this.state.posts.filter(user => {
+      return user.username === this.props.loggedIn;
     });
+
+    let results =
+      this.props.loggedIn !== ""
+        ? seller.filter(item => {
+            return item.booktitle.includes(this.props.query);
+          })
+        : this.state.posts.filter(item => {
+            return item.booktitle.includes(this.props.query);
+          });
+
     return (
       <div id="signup">
         <div>
@@ -123,7 +140,9 @@ class UnconnectedApp extends Component {
                   <a href="buy.html">Buy</a>
                 </li>
                 <li>
-                  <a href="sell.html">Sell</a>
+                  <button class="btn" onClick={this.selltoggle.bind(this)}>
+                    Sell
+                  </button>
                 </li>
               </ul>
             </div>
@@ -212,7 +231,7 @@ class UnconnectedApp extends Component {
 }
 
 let mapStateToProps = st => {
-  return { query: st.searchQuery };
+  return { query: st.searchQuery, loggedIn: st.loggedIn };
 };
 
 let App = connect(mapStateToProps)(UnconnectedApp);

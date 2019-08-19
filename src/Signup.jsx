@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Login from "./Login.jsx";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -6,7 +7,7 @@ class Signup extends Component {
       firstname: "",
       lastname: "",
       phone: "",
-      email: "",
+      username: "",
       password: ""
     };
   }
@@ -30,14 +31,14 @@ class Signup extends Component {
     this.setState({ password: event.target.value });
   };
 
-  handleSubmit = async evt => {
+  handleSignSubmit = async evt => {
     evt.preventDefault();
     console.log("signup form submitted");
     let data = new FormData();
     data.append("firstname", this.state.firstname);
     data.append("lastname", this.state.lastname);
     data.append("phone", this.state.phone);
-    data.append("email", this.state.username);
+    data.append("username", this.state.username);
     data.append("password", this.state.password);
     let response = await fetch("/sign-up", { method: "POST", body: data });
     let responsebody = await response.text();
@@ -53,7 +54,7 @@ class Signup extends Component {
   render = () => {
     return (
       <div class="popup">
-        <form class="registration-form" onSubmit={this.handleSubmit}>
+        <form class="registration-form" onSubmit={this.handleSignSubmit}>
           {/* First Name */}
           <div>
             <input
@@ -82,8 +83,8 @@ class Signup extends Component {
           <div>
             <input
               type="text"
-              placeholder="Username"
-              onChange={this.handleUsernameChange}
+              placeholder="Email"
+              onChange={this.handleEmailChange}
             />
           </div>
           {/* Password */}
@@ -100,21 +101,6 @@ class Signup extends Component {
           <p class="message">
             {" "}
             Already Registered? <a href="#">Login</a>
-            <form class="login-form" onSubmit={this.handleSubmit}>
-              {/* Username */}
-              <input
-                type="text"
-                placeholder="Username"
-                onChange={this.handleUsernameChange}
-              />
-              {/* Password */}
-              <input
-                type="text"
-                placeholder="Password"
-                onChange={this.handlePasswordChange}
-              />
-              <input type="submit" />
-            </form>
           </p>
         </form>
       </div>
