@@ -120,7 +120,7 @@ body {
   background-color: rgb(253, 250, 250);
   padding-top: 100px;
   text-align: center;
-  /* min-height: 500px */
+  min-height: 500px;
 }
 .text-primary {
   color: #f3871b;
@@ -291,4 +291,9 @@ a {
   outline: none;
 }
 
-/* Home products */
+/* Cart */
+
+#cart-info .add-item {
+  height: 50px;
+  width: 50px;
+}

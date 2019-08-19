@@ -125,6 +125,9 @@ class UnconnectedApp extends Component {
                 <li>
                   <a href="sell.html">Sell</a>
                 </li>
+                {/* <li>
+                  <Cart />
+                </li> */}
               </ul>
             </div>
           </nav>

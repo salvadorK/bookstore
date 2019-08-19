@@ -19,13 +19,14 @@ export default class Cartlist extends Component {
   };
   render = () => {
     return (
-      <div>
+      <div id="cart-info">
         <div>
-          <img src={this.props.contents.img} height="25px" />
+          <img src={this.props.contents.img} height="100px" width="100px" />
           <h4>{this.props.contents.booktitle}</h4>
           <div>
             <form>
               <input
+                class="add-item"
                 type="number"
                 defaultValue={this.props.contents.qty}
                 onChange={this.quantity}
