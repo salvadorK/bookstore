@@ -37,6 +37,7 @@ class UnconnectedLogin extends Component {
     }
     alert("login - success");
     console.log(this.state.username);
+    this.props.closePopup();
     this.props.dispatch({
       type: "login-success",
       loggedIn: this.state.username
