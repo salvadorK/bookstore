@@ -23,8 +23,21 @@ class UnconnectedApp extends Component {
       passwordInput: "",
       username: undefined,
       posts: [],
-      showPopup: false
+      showPopup: false,
+      showBuy: false
     };
+  }
+  async componentDidMount() {
+    let response = await fetch("/get-cookie");
+    let body = JSON.parse(await response.text());
+    console.log(body.username);
+    if (body.success) {
+      this.props.dispatch({
+        type: "login-success",
+        loggedIn: body.username
+      });
+      return;
+    }
   }
   togglePopup() {
     this.setState({
@@ -32,23 +45,25 @@ class UnconnectedApp extends Component {
     });
   }
 
-  selltoggle = evt => {
-    evt.preventDefault();
-    this.posts.loggedIn === ""
-      ? alert(" You are logged in " + this.posts.loggedIn)
-      : this.togglePopup.bind(this);
+  selltoggle = () => {
+    this.props.loggedIn !== ""
+      ? this.setState({ showBuy: false })
+      : this.togglePopup();
+  };
+
+  buytoggle = () => {
+    this.props.loggedIn !== ""
+      ? this.setState({ showBuy: true })
+      : this.togglePopup();
   };
 
   //Beginning -- Will prevent from reloading when there is no change to the cart
-  componentDidMount() {
-    this.reload();
-  }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.posts !== this.state.posts) {
-      this.reload();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.posts !== this.state.posts) {
+  //     this.reload();
+  //   }
+  // }
   // End --Will prevent from reloading when there is no change to the cart
   reload = async () => {
     let response = await fetch("/all-posts");
@@ -56,10 +71,6 @@ class UnconnectedApp extends Component {
     body = JSON.parse(body);
     this.setState({ posts: body });
   };
-
-  componentDidMount() {
-    this.reload();
-  }
 
   // usernameChange = evt => {
   //   this.setState({ usernameInput: evt.target.value });
@@ -104,9 +115,15 @@ class UnconnectedApp extends Component {
   //   alert("user name and password don't match");
   // };
   render = () => {
-    let seller = this.state.posts.filter(user => {
-      return user.username === this.props.loggedIn;
-    });
+    this.reload();
+
+    let seller = this.state.showBuy
+      ? this.state.posts.filter(user => {
+          return user.username !== this.props.loggedIn;
+        })
+      : this.state.posts.filter(user => {
+          return user.username === this.props.loggedIn;
+        });
 
     let results =
       this.props.loggedIn !== ""
@@ -123,7 +140,7 @@ class UnconnectedApp extends Component {
           <nav class="navbar">
             <div class="container">
               <h1 class="logo">
-                <a href="index.html">Bookstore</a>
+                <a href="#">Bookstore</a>
                 {/* <h2>
                   <Search />
                 </h2> */}
@@ -137,7 +154,9 @@ class UnconnectedApp extends Component {
                   <Search />
                 </li>
                 <li>
-                  <a href="buy.html">Buy</a>
+                  <button class="btn" onClick={this.buytoggle.bind(this)}>
+                    Buy
+                  </button>
                 </li>
                 <li>
                   <button class="btn" onClick={this.selltoggle.bind(this)}>

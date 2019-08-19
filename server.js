@@ -28,6 +28,20 @@ MongoClient.connect(
         dbo = db.db("alibay");
     }
 );
+app.get("/get-cookie", (req, res) => {
+    console.log(req.cookies.sid)
+    console.log(sessions)
+    if (sessions[req.cookies.sid]) {
+        res.send(JSON.stringify({
+            success: true,
+            username: sessions[req.cookies.sid]
+        }))
+        return
+    }
+    res.send(JSON.stringify({
+        success: false
+    }))
+})
 app.post("/sign-up", upload.none(), (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -41,6 +55,7 @@ app.post("/sign-up", upload.none(), (req, res) => {
                         success: false
                     })
                 );
+
                 return;
             }
             dbo.collection("users").insertOne({

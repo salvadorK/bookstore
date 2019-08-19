@@ -9,8 +9,8 @@ class Spopup extends React.Component {
       <div className="spopup">
         <div className="spopup-inner">
           <h1>{this.props.text}</h1>
-          <Signup />
-          <Login />
+          <Signup closePopup={this.props.closePopup} />
+          <Login closePopup={this.props.closePopup} />
           <button onClick={this.props.closePopup}>close me</button>
         </div>
       </div>
