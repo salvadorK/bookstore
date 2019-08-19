@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import Cartlist from "./cart-list.jsx";
-
-export default class Cart extends Component {
+import { connect } from "react-redux";
+ class unconnectedCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +27,15 @@ export default class Cart extends Component {
     if (prevState.posts !== this.state.posts) {
       this.reload();
     }
+  }
+  totalnumber =() => {
+    let totalqty = this.state.posts.map(p => p.qty).reduce(myFunc);
+    function myFunc(total, num) {
+      return total + num}
+    this.props.dispatch({
+      type:"totalqty",
+      totalqty: totalqty
+    })
   }
 
   onToken = token => {
@@ -74,3 +83,6 @@ export default class Cart extends Component {
     );
   }
 }
+
+let Cart = connect()(unconnectedCart)
+export default Cart

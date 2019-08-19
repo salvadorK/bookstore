@@ -1,20 +1,36 @@
-import { createStore } from "redux";
-let reducer = function(state, action) {
-  if (action.type === "query") {
-    return {
-      ...state,
-      searchQuery: action.q
-    };
-  }
-  return state;
+import {
+    createStore
+} from "redux";
+let reducer = function (state, action) {
+    if (action.type === "query") {
+        return {
+            ...state,
+            searchQuery: action.q
+        }
+    }
+    if (action.type === "login-success") {
+        return {
+            ...state,
+            loggedIn: action.loggedIn
+        }
+    }
+    if (action.type === "totalqty") {
+        return {
+            ...state,
+            totalqty: action.totalqty
+        }
+    }
+
+    return state;
 };
 
 const store = createStore(
-  reducer,
-  {
-    searchQuery: ""
-  },
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    reducer, {
+        searchQuery: "",
+        loggedIn: "",
+        totalqty: 0
+    },
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 export default store;
