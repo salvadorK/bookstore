@@ -9,6 +9,17 @@ export default class Cart extends Component {
       posts: []
     };
   }
+  reload = async () => {
+    let response = await fetch("/user-prepurchase");
+    let body = await response.text();
+    body = JSON.parse(body);
+
+    if (body.success) {
+      this.setState({ posts: false });
+      return;
+    }
+    this.setState({ posts: body });
+  };
   componentDidMount() {
     this.reload();
   }
@@ -30,19 +41,30 @@ export default class Cart extends Component {
       });
     });
   };
-  reload = async () => {
-    let response = await fetch("/user-prepurchase");
-    let body = await response.text();
-    body = JSON.parse(body);
-    this.setState({ posts: body });
-  };
+
+  clear() {
+    fetch("/clear",{method: "POST"})
+  }
+
   render() {
+    let state = this.state.posts;
+    let results = !state[0]
+      ? "NO ITEMS ON CART"
+      : this.state.posts.map(p => <Cartlist key={p._id} contents={p} />);
+    let numArr = !state[0]
+      ? "0.00"
+      : this.state.posts.map(p => p.qty * p.price).reduce(myFunc);
+    function myFunc(total, num) {
+      return total + num;
+    }
     return (
       <div>
+        <div>{results}</div>
+        <div>Total is ${numArr}</div>
         <div>
-          {this.state.posts.map(p => (
-            <Cartlist key={p._id} contents={p} />
-          ))}
+          <form>
+            <input type="button" onClick={this.clear} value="clear cart" />
+          </form>
         </div>
         <StripeCheckout
           token={this.onToken}

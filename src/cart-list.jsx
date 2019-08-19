@@ -7,6 +7,15 @@ export default class Cartlist extends Component {
   }
   quantity = e => {
     this.setState({ qty: e.target.value });
+    let data = new FormData();
+    data.append("qty", e.target.value);
+    data.append("booktitle", this.props.contents.booktitle);
+    fetch("/updatepurchase", { method: "POST", body: data });
+  };
+  deleteOne = e => {
+    let data = new FormData();
+    data.append("booktitle", this.props.contents.booktitle);
+    fetch("/deleteOne", { method: "POST", body: data });
   };
   render = () => {
     return (
@@ -25,6 +34,11 @@ export default class Cartlist extends Component {
           </div>
           <div>
             <h4>CAD ${+this.props.contents.price * this.state.qty}</h4>
+          </div>
+          <div>
+            <form>
+              <input type="button" onClick={this.deleteOne} value="delete" />
+            </form>
           </div>
         </div>
       </div>
