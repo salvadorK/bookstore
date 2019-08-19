@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import Cartlist from "./cart-list.jsx";
 import { connect } from "react-redux";
- class unconnectedCart extends Component {
+class unconnectedCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,15 +28,16 @@ import { connect } from "react-redux";
       this.reload();
     }
   }
-  totalnumber =() => {
+  totalnumber = () => {
     let totalqty = this.state.posts.map(p => p.qty).reduce(myFunc);
     function myFunc(total, num) {
-      return total + num}
+      return total + num;
+    }
     this.props.dispatch({
-      type:"totalqty",
+      type: "totalqty",
       totalqty: totalqty
-    })
-  }
+    });
+  };
 
   onToken = token => {
     let data = new FormData();
@@ -52,7 +53,7 @@ import { connect } from "react-redux";
   };
 
   clear() {
-    fetch("/clear",{method: "POST"})
+    fetch("/clear", { method: "POST" });
   }
 
   render() {
@@ -67,7 +68,7 @@ import { connect } from "react-redux";
       return total + num;
     }
     return (
-      <div>
+      <div class="spopup-inner">
         <div>{results}</div>
         <div>Total is ${numArr}</div>
         <div>
@@ -84,5 +85,5 @@ import { connect } from "react-redux";
   }
 }
 
-let Cart = connect()(unconnectedCart)
-export default Cart
+let Cart = connect()(unconnectedCart);
+export default Cart;

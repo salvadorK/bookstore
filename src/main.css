@@ -34,7 +34,6 @@ body {
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
-
 }
 
 .registration-form input {
@@ -95,7 +94,6 @@ body {
 #signup .search {
   padding: 10px;
 }
-
 .login-signup-grid {
   background: rgb(80, 77, 77);
   display: block;
@@ -124,7 +122,6 @@ body {
   text-align: center;
   min-height: 500px;
 }
-
 .text-primary {
   color: #f3871b;
 }
@@ -142,28 +139,23 @@ body {
   border: none;
   cursor: pointer;
 }
-
 .btn:hover {
   background: #f3871b;
   color: #4444;
 }
-
 .btn-light {
   background: #dddd;
   color: #333;
 }
-
 /* card under each images */
 .products-container {
   background: #faf4f4;
   padding: 2 px;
-  z-index: -1;
 }
 
 .products-container:hover {
   background: #f3f1f0;
 }
-
 /* 
 .card {
   background: #f33b1b;
@@ -189,12 +181,10 @@ img {
   z-index: 5;
   width: 100%;
 }
-
 .navbar .container {
   align-items: center;
   position: sticky;
 }
-
 .navbar a {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(252, 247, 247);
@@ -214,7 +204,6 @@ img {
   float: right;
   list-style: none;
 }
-
 .navbar ul li {
   float: right;
 }
@@ -225,12 +214,10 @@ img {
   text-align: center;
   font-weight: bold;
 }
-
 .navbar ul li a:hover {
   background: #444;
   color: #f7c08a;
 }
-
 /*to take out all the underlined links (a href*/
 a {
   text-decoration: none;
@@ -250,7 +237,6 @@ a {
   border-radius: 0.3em 0.3em 0.3em 0.3em;
   padding: 0.2em;
 }
-
 /* #product {
   display: flexbox;
 } */
@@ -281,7 +267,6 @@ a {
   text-align: center;
   padding-top: 200px;
 }
-
 #showcase .showcase-content h1 {
   font-size: 30px;
   line-height: 1.5em;
@@ -302,18 +287,13 @@ a {
   border: none;
   cursor: pointer;
 }
-
 .add-to-cart-button__primary:focus {
   outline: none;
 }
 
-<<<<<<< HEAD
 /* Cart */
 
 #cart-info .add-item {
   height: 50px;
   width: 50px;
 }
-=======
-/* Home products */
->>>>>>> 32674ddc5ae2e90b0cb75cb9dfda479c03a909bd

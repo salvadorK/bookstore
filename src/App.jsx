@@ -23,7 +23,8 @@ class UnconnectedApp extends Component {
       passwordInput: "",
       username: undefined,
       posts: [],
-      showPopup: false
+      showPopup: false,
+      showCart: false
     };
   }
   togglePopup() {
@@ -31,7 +32,11 @@ class UnconnectedApp extends Component {
       showPopup: !this.state.showPopup
     });
   }
-
+  carttoggle() {
+    this.setState({
+      showCart: !this.state.showCart
+    });
+  }
   selltoggle = evt => {
     evt.preventDefault();
     this.posts.loggedIn === ""
@@ -144,9 +149,14 @@ class UnconnectedApp extends Component {
                     Sell
                   </button>
                 </li>
-                {/* <li>
-                  <Cart />
-                </li> */}
+                <li>
+                  <button type="submit" onClick={this.carttoggle.bind(this)}>
+                    {this.state.showCart ? (
+                      <Cart closePopup={this.togglePopup.bind(this)} />
+                    ) : null}
+                    Cart
+                  </button>
+                </li>
               </ul>
             </div>
           </nav>
@@ -234,7 +244,11 @@ class UnconnectedApp extends Component {
 }
 
 let mapStateToProps = st => {
-  return { query: st.searchQuery, loggedIn: st.loggedIn };
+  return {
+    query: st.searchQuery,
+    loggedIn: st.loggedIn,
+    totalqty: st.totalqty
+  };
 };
 
 let App = connect(mapStateToProps)(UnconnectedApp);
