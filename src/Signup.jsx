@@ -6,7 +6,7 @@ class Signup extends Component {
       firstname: "",
       lastname: "",
       phone: "",
-      username: "",
+      email: "",
       password: ""
     };
   }
@@ -21,7 +21,7 @@ class Signup extends Component {
     this.setState({ phone: e.target.value });
   };
 
-  handleUsernameChange = event => {
+  handleEmailChange = event => {
     console.log("new username", event.target.value);
     this.setState({ username: event.target.value });
   };
@@ -37,7 +37,7 @@ class Signup extends Component {
     data.append("firstname", this.state.firstname);
     data.append("lastname", this.state.lastname);
     data.append("phone", this.state.phone);
-    data.append("username", this.state.username);
+    data.append("email", this.state.username);
     data.append("password", this.state.password);
     let response = await fetch("/sign-up", { method: "POST", body: data });
     let responsebody = await response.text();
@@ -52,19 +52,70 @@ class Signup extends Component {
 
   render = () => {
     return (
-      <div className="popup">
-        <form onSubmit={this.handleSubmit}>
-          First Name
-          <input type="text" onChange={this.firstnameChangeHandler} />
-          Last Name
-          <input type="text" onChange={this.lastnameChangeHandler} />
-          Phone
-          <input type="text" onChange={this.phoneChangeHandler} />
-          Username
-          <input type="text" onChange={this.handleUsernameChange} />
-          Password
-          <input type="text" onChange={this.handlePasswordChange} />
-          <input type="submit" />
+      <div class="popup">
+        <form class="registration-form" onSubmit={this.handleSubmit}>
+          {/* First Name */}
+          <div>
+            <input
+              type="text"
+              placeholder="First Name"
+              onChange={this.firstnameChangeHandler}
+            />
+          </div>
+          {/* Last Name */}
+          <div>
+            <input
+              type="text"
+              placeholder="Last Name"
+              onChange={this.lastnameChangeHandler}
+            />
+          </div>
+          {/* Phone */}
+          <div>
+            <input
+              type="text"
+              placeholder="Phone"
+              onChange={this.phoneChangeHandler}
+            />
+          </div>
+          {/* Username */}
+          <div>
+            <input
+              type="text"
+              placeholder="Username"
+              onChange={this.handleUsernameChange}
+            />
+          </div>
+          {/* Password */}
+          <div>
+            <input
+              type="text"
+              placeholder="Password"
+              onChange={this.handlePasswordChange}
+            />
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="signup" />
+          </div>
+          <p class="message">
+            {" "}
+            Already Registered? <a href="#">Login</a>
+            <form class="login-form" onSubmit={this.handleSubmit}>
+              {/* Username */}
+              <input
+                type="text"
+                placeholder="Username"
+                onChange={this.handleUsernameChange}
+              />
+              {/* Password */}
+              <input
+                type="text"
+                placeholder="Password"
+                onChange={this.handlePasswordChange}
+              />
+              <input type="submit" />
+            </form>
+          </p>
         </form>
       </div>
     );

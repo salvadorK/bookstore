@@ -10,9 +10,10 @@ class UnconncectedSearch extends Component {
       <div id="search-box-css">
         <input
           type="text"
-          onChange={this.handleQuery}
-          placeholder="search over 2 million products"
+          placeholder="search..."
+          class="search-box-input"
           value={this.props.query}
+          onChange={this.handleQuery}
         />
       </div>
     );
