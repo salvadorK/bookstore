@@ -136,11 +136,16 @@ class UnconnectedApp extends Component {
     let results =
       this.props.loggedIn !== ""
         ? seller.filter(item => {
-            return item.booktitle.includes(this.props.query);
+            return item.booktitle
+              .toLowerCase()
+              .includes(this.props.query.toLowerCase());
           })
         : this.state.posts.filter(item => {
-            return item.booktitle.includes(this.props.query);
+            return item.booktitle
+              .toLowerCase()
+              .includes(this.props.query.toLowerCase());
           });
+    console.log(results);
 
     return (
       <div id="signup">
@@ -178,12 +183,10 @@ class UnconnectedApp extends Component {
                   </button>
                 </li>
                 <li>
-                  <button type="submit" onClick={this.carttoggle.bind(this)}>
-                    {this.state.showCart ? (
-                      <Cart closePopup={this.togglePopup.bind(this)} />
-                    ) : null}
+                  <button class="btn" onClick={this.carttoggle.bind(this)}>
                     Cart
                   </button>
+                  {this.props.totalqty}
                 </li>
               </ul>
             </div>
@@ -258,6 +261,9 @@ class UnconnectedApp extends Component {
             <button onClick={this.togglePopup.bind(this)}>Click here</button>
             {this.state.showPopup ? (
               <Spopup closePopup={this.togglePopup.bind(this)} />
+            ) : null}
+            {this.state.showCart ? (
+              <Cart closePopup={this.togglePopup.bind(this)} />
             ) : null}
           </div>
           <div class="container-img">

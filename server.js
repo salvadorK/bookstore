@@ -173,7 +173,7 @@ app.post("/addcart", upload.none(), (req, res) => {
     let price = req.body.price
     let qty = req.body.qty
     let dop = new Date().toLocaleString()
-    console.log(username)
+    console.log("TEST", username, booktitle)
     if (username === undefined) {
         res.send(JSON.stringify({
             success: false

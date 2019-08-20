@@ -17,7 +17,7 @@ let reducer = function (state, action) {
     if (action.type === "totalqty") {
         return {
             ...state,
-            totalqty: action.totalqty
+            totalqty: action.totalquantity
         }
     }
 
@@ -28,7 +28,7 @@ const store = createStore(
     reducer, {
         searchQuery: "",
         loggedIn: "",
-        totalqty: 0
+        totalqty: ""
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

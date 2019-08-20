@@ -21,7 +21,7 @@ export default class Cartlist extends Component {
     return (
       <div id="cart-info">
         <div>
-          <img src={this.props.contents.img} height="100px" width="100px" />
+          <img src={this.props.contents.img} height="10px" width="10px" />
           <h4>{this.props.contents.booktitle}</h4>
           <div>
             <form>
