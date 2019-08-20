@@ -3,16 +3,13 @@ import NewPost from "./NewPost.jsx";
 import Post from "./Post.jsx";
 import { connect } from "react-redux";
 import Search from "./Search.jsx";
-import Signup from "./Signup.jsx";
+
 import Cart from "./cart.jsx";
-import Login from "./Login.jsx";
+
 import "./main.css";
-import Navbar from "./Navbar.jsx";
+
 import Spopup from "./Spopup.jsx";
 import Detail from "./Detail.jsx";
-
-import StripeCheckout from "react-stripe-checkout";
-import Cartlist from "./cart-list.jsx";
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
