@@ -151,8 +151,6 @@ class UnconnectedApp extends Component {
               .toLowerCase()
               .includes(this.props.query.toLowerCase());
           });
-    console.log(results);
-
     return (
       <BrowserRouter>
         <Route exact={true} path="/detail/:did" render={renderDetail} />
