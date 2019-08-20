@@ -121,6 +121,8 @@ class UnconnectedApp extends Component {
   //   alert("user name and password don't match");
   // };
   render = () => {
+    // <BrowserRouter>
+    // <Route>
     this.reload();
 
     let seller = this.state.showBuy
@@ -150,6 +152,12 @@ class UnconnectedApp extends Component {
             <div class="container">
               <h1 class="logo">
                 <a href="#">Bookstore</a>
+                <li>  <div>
+            <button onClick={this.togglePopup.bind(this)}>Click here</button>
+            {this.state.showPopup ? (
+              <Spopup closePopup={this.togglePopup.bind(this)} />
+            ) : null}
+          </div></li>
                 {/* <h2>
                   <Search />
                 </h2> */}
@@ -265,6 +273,9 @@ class UnconnectedApp extends Component {
       </div>
     );
   };
+}
+{
+  /* </Route> <BrowserRoute> */
 }
 
 let mapStateToProps = st => {
