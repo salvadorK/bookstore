@@ -13,7 +13,7 @@ import Spopup from "./Spopup.jsx";
 import StripeCheckout from "react-stripe-checkout";
 import Cartlist from "./cart-list.jsx";
 
-// import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 class UnconnectedApp extends Component {
   constructor() {
@@ -121,9 +121,15 @@ class UnconnectedApp extends Component {
   //   alert("user name and password don't match");
   // };
   render = () => {
-    // <BrowserRouter>
-    // <Route>
     this.reload();
+
+    let renderDetail = rd => {
+      let detailId = rd.match.params.did;
+      let candetails = this.state.post.filter(details => {
+        return details._id === detailId;
+      });
+      return <Detail detail={candetails[0]} />;
+    };
 
     let seller = this.state.showBuy
       ? this.state.posts.filter(user => {
@@ -148,86 +154,83 @@ class UnconnectedApp extends Component {
     console.log(results);
 
     return (
-      <div id="signup">
-        <div>
-          <nav class="navbar">
-            <div class="container">
-              <h1 class="logo">
-                <a href="#">Bookstore</a>
-                <li>  <div>
-            <button onClick={this.togglePopup.bind(this)}>Click here</button>
-            {this.state.showPopup ? (
-              <Spopup closePopup={this.togglePopup.bind(this)} />
-            ) : null}
-          </div></li>
-                {/* <h2>
+      <BrowserRouter>
+        <Route exact={true} path="/detail/:did" render={renderDetail} />
+        <div id="signup">
+          <div>
+            <nav class="navbar">
+              <div class="container">
+                <h1 class="logo">
+                  <a href="#">Bookstore</a>
+
+                  {/* <h2>
                   <Search />
                 </h2> */}
-              </h1>
-              {/* <Signup /> */}
-              <ul>
-                {/* <Login /> */}
+                </h1>
+                {/* <Signup /> */}
+                <ul>
+                  {/* <Login /> */}
 
-                <li>
-                  <h2 class="search" />
-                  <Search />
-                </li>
-                <li>
-                  <button class="btn" onClick={this.buytoggle.bind(this)}>
-                    Buy
-                  </button>
-                </li>
-                <li>
-                  <button class="btn" onClick={this.selltoggle.bind(this)}>
-                    Sell
-                  </button>
-                </li>
-                <li>
-                  <button class="btn" onClick={this.carttoggle.bind(this)}>
-                    Cart
-                  </button>
-                  {this.props.totalqty}
-                </li>
-              </ul>
-            </div>
-          </nav>
-          {/* Showcase */}
-          <header id="showcase">
-            <div class="container">
-              <div class="showcase-container">
-                <div class="showcase-content">
-                  <div class="category-kids">Kids</div>
-                  <h1>
-                    <span class="text-primary">BOOKS</span> FOR NEW BEGINNINGS
-                  </h1>
-                  <p class="lead">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Cum quaerat quae natus distinctio corrupti cupiditate
-                    architecto, voluptatem ratione temporibus reiciendis!
-                  </p>
-                  <a
-                    href="articles.html"
-                    class="btn
+                  <li>
+                    <h2 class="search" />
+                    <Search />
+                  </li>
+                  <li>
+                    <button class="btn" onClick={this.buytoggle.bind(this)}>
+                      Buy
+                    </button>
+                  </li>
+                  <li>
+                    <button class="btn" onClick={this.selltoggle.bind(this)}>
+                      Sell
+                    </button>
+                  </li>
+                  <li>
+                    <button class="btn" onClick={this.carttoggle.bind(this)}>
+                      Cart
+                    </button>
+                    {this.props.totalqty}
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            {/* Showcase */}
+            <header id="showcase">
+              <div class="container">
+                <div class="showcase-container">
+                  <div class="showcase-content">
+                    <div class="category-kids">Kids</div>
+                    <h1>
+                      <span class="text-primary">BOOKS</span> FOR NEW BEGINNINGS
+                    </h1>
+                    <p class="lead">
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                      Cum quaerat quae natus distinctio corrupti cupiditate
+                      architecto, voluptatem ratione temporibus reiciendis!
+                    </p>
+                    <a
+                      href="articles.html"
+                      class="btn
                   btn-primary"
-                  >
-                    More details
-                  </a>
+                    >
+                      More details
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </header>
+            </header>
 
-          {/* <Search /> */}
-          {/* <Navbar /> */}
-          {/* <Login /> */}
-          {/* <Cart /> */}
-          {/* <StripeCheckout />
+            {/* <Search /> */}
+            {/* <Navbar /> */}
+            {/* <Login /> */}
+            {/* <Cart /> */}
+            {/* <StripeCheckout />
           
           <Cartlist /> */}
-          {/* <NewPost /> */}
-          {/* <Signup /> */}
-          {/* </div> */}
-          {/* 
+            {/* <NewPost /> */}
+            {/* <Signup /> */}
+            {/* </div> */}
+            {/* 
         <form class="login-signup-grid" onSubmit={this.loginsubmitHandler}>
           <input
             type="text"
@@ -242,7 +245,7 @@ class UnconnectedApp extends Component {
           <input type="submit" value="login" />
         </form> */}
 
-          {/* 
+            {/* 
         <form onSubmit={this.signUpsubmitHandler}>
           <input
             type="text"
@@ -257,27 +260,25 @@ class UnconnectedApp extends Component {
           Don't have an account yet?
           <input type="submit" value="sign-up" />
         </form> */}
-          <div>
-            <button onClick={this.togglePopup.bind(this)}>Click here</button>
-            {this.state.showPopup ? (
-              <Spopup closePopup={this.togglePopup.bind(this)} />
-            ) : null}
-            {this.state.showCart ? (
-              <Cart closePopup={this.togglePopup.bind(this)} />
-            ) : null}
-          </div>
-          <div class="container-img">
-            {results.map(p => (
-              <Post contents={p} />
-            ))}
+            <div>
+              <button onClick={this.togglePopup.bind(this)} />
+              {this.state.showPopup ? (
+                <Spopup closePopup={this.togglePopup.bind(this)} />
+              ) : null}
+              {this.state.showCart ? (
+                <Cart closePopup={this.togglePopup.bind(this)} />
+              ) : null}
+            </div>
+            <div class="container-img">
+              {results.map(p => (
+                <Post contents={p} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   };
-}
-{
-  /* </Route> <BrowserRoute> */
 }
 
 let mapStateToProps = st => {
