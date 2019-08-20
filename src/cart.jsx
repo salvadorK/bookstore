@@ -28,16 +28,6 @@ class unconnectedCart extends Component {
       this.reload();
     }
   }
-  totalnumber = () => {
-    let totalqty = this.state.posts.map(p => p.qty).reduce(myFunc);
-    function myFunc(total, num) {
-      return total + num;
-    }
-    this.props.dispatch({
-      type: "totalqty",
-      totalqty: totalqty
-    });
-  };
 
   onToken = token => {
     let data = new FormData();
@@ -47,7 +37,7 @@ class unconnectedCart extends Component {
       body: data
     }).then(response => {
       response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
+        alert(`We are in business`);
       });
     });
   };
@@ -67,19 +57,30 @@ class unconnectedCart extends Component {
     function myFunc(total, num) {
       return total + num;
     }
+    let totalqty = !state[0]
+      ? "0"
+      : this.state.posts.map(p => p.qty).reduce(myFunc);
+    this.props.dispatch({
+      type: "totalqty",
+      totalquantity: totalqty
+    });
+
     return (
-      <div class="spopup-inner">
-        <div>{results}</div>
-        <div>Total is ${numArr}</div>
-        <div>
-          <form>
-            <input type="button" onClick={this.clear} value="clear cart" />
-          </form>
+      <div className="spopup">
+        <div className="spopup-inner">
+          <div>{results}</div>
+          <div>Total is ${numArr}</div>
+          <div>Total items: {totalqty}</div>
+          <div>
+            <form>
+              <input type="button" onClick={this.clear} value="clear cart" />
+            </form>
+          </div>
+          <StripeCheckout
+            token={this.onToken}
+            stripeKey="pk_test_zbiNciQsHQOG0nNhUebQtTUY00KqyFosNe"
+          />
         </div>
-        <StripeCheckout
-          token={this.onToken}
-          stripeKey="pk_test_zbiNciQsHQOG0nNhUebQtTUY00KqyFosNe"
-        />
       </div>
     );
   }
