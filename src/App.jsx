@@ -24,11 +24,8 @@ class UnconnectedApp extends Component {
       username: undefined,
       posts: [],
       showPopup: false,
-<<<<<<< HEAD
-      showCart: false
-=======
+      showCart: false,
       showBuy: false
->>>>>>> a8567d7bb8b9cf0abce63a849b9807e4e73114b6
     };
   }
   async componentDidMount() {
@@ -53,7 +50,6 @@ class UnconnectedApp extends Component {
       showCart: !this.state.showCart
     });
   }
-  
 
   selltoggle = () => {
     this.props.loggedIn !== ""
@@ -125,6 +121,8 @@ class UnconnectedApp extends Component {
   //   alert("user name and password don't match");
   // };
   render = () => {
+    // <BrowserRouter>
+    // <Route>
     this.reload();
 
     let seller = this.state.showBuy
@@ -151,6 +149,12 @@ class UnconnectedApp extends Component {
             <div class="container">
               <h1 class="logo">
                 <a href="#">Bookstore</a>
+                <li>  <div>
+            <button onClick={this.togglePopup.bind(this)}>Click here</button>
+            {this.state.showPopup ? (
+              <Spopup closePopup={this.togglePopup.bind(this)} />
+            ) : null}
+          </div></li>
                 {/* <h2>
                   <Search />
                 </h2> */}
@@ -265,6 +269,9 @@ class UnconnectedApp extends Component {
       </div>
     );
   };
+}
+{
+  /* </Route> <BrowserRoute> */
 }
 
 let mapStateToProps = st => {
