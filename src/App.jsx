@@ -123,10 +123,9 @@ class UnconnectedApp extends Component {
   // };
   render = () => {
     this.reload();
-
     let renderDetail = rd => {
       let detailId = rd.match.params.did;
-      let candetails = this.state.post.filter(details => {
+      let candetails = this.state.posts.filter(details => {
         return details._id === detailId;
       });
       return <Detail detail={candetails[0]} />;
@@ -154,7 +153,6 @@ class UnconnectedApp extends Component {
           });
     return (
       <BrowserRouter>
-        <Route exact={true} path="/detail/:did" render={renderDetail} />
         <div id="signup">
           <div>
             <nav class="navbar">
@@ -194,6 +192,7 @@ class UnconnectedApp extends Component {
               </div>
             </nav>
             {/* Showcase */}
+
             <header id="showcase">
               <div class="container">
                 <div class="showcase-container">
@@ -268,6 +267,7 @@ class UnconnectedApp extends Component {
                 <Cart closePopup={this.togglePopup.bind(this)} />
               ) : null}
             </div>
+            <Route exact={true} path="/detail/:did" render={renderDetail} />
             <div class="container-img">
               {results.map(p => (
                 <Post contents={p} />
