@@ -23,11 +23,11 @@ class unconnectedCart extends Component {
   componentDidMount() {
     this.reload();
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.posts !== this.state.posts) {
-      this.reload();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.posts !== this.state.posts) {
+  //     this.reload();
+  //   }
+  // }
 
   onToken = token => {
     let data = new FormData();
@@ -66,8 +66,8 @@ class unconnectedCart extends Component {
     });
 
     return (
-      <div className="spopup">
-        <div className="spopup-inner">
+      <div className="shopping-cart">
+        <div className="">
           <div>{results}</div>
           <div>Total is ${numArr}</div>
           <div>Total items: {totalqty}</div>

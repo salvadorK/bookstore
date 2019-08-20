@@ -94,6 +94,7 @@ body {
 #signup .search {
   padding: 10px;
 }
+
 .login-signup-grid {
   background: rgb(80, 77, 77);
   display: block;
@@ -122,6 +123,7 @@ body {
   text-align: center;
   min-height: 500px;
 }
+
 .text-primary {
   color: #f3871b;
 }
@@ -139,14 +141,17 @@ body {
   border: none;
   cursor: pointer;
 }
+
 .btn:hover {
   background: #f3871b;
   color: #4444;
 }
+
 .btn-light {
   background: #dddd;
   color: #333;
 }
+
 /* card under each images */
 .products-container {
   background: #faf4f4;
@@ -156,6 +161,7 @@ body {
 .products-container:hover {
   background: #f3f1f0;
 }
+
 /* 
 .card {
   background: #f33b1b;
@@ -181,10 +187,12 @@ img {
   z-index: 5;
   width: 100%;
 }
+
 .navbar .container {
   align-items: center;
   position: sticky;
 }
+
 .navbar a {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(252, 247, 247);
@@ -204,6 +212,7 @@ img {
   float: right;
   list-style: none;
 }
+
 .navbar ul li {
   float: right;
 }
@@ -214,10 +223,12 @@ img {
   text-align: center;
   font-weight: bold;
 }
+
 .navbar ul li a:hover {
   background: #444;
   color: #f7c08a;
 }
+
 /*to take out all the underlined links (a href*/
 a {
   text-decoration: none;
@@ -237,6 +248,7 @@ a {
   border-radius: 0.3em 0.3em 0.3em 0.3em;
   padding: 0.2em;
 }
+
 /* #product {
   display: flexbox;
 } */
@@ -267,6 +279,7 @@ a {
   text-align: center;
   padding-top: 200px;
 }
+
 #showcase .showcase-content h1 {
   font-size: 30px;
   line-height: 1.5em;
@@ -287,13 +300,40 @@ a {
   border: none;
   cursor: pointer;
 }
+
 .add-to-cart-button__primary:focus {
   outline: none;
 }
 
 /* Cart */
 
-#cart-info .add-item {
+
+/* #cart-info .add-item {
   height: 50px;
   width: 50px;
+} */
+
+.shopping-cart {
+  position: absolute;
+  top: 59.89px;
+  right: 30px;
+  width: 423px;
+  height: 423px;
+  margin: 20px auto;
+  background: #FFFFFF;
+  box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.10);
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  padding: 20px 30px;
+  height: 120px;
+  display: flex;
+}
+
+.image {
+  margin-right: 50px;
 }

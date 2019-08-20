@@ -186,17 +186,18 @@ app.post("/addcart", upload.none(), (req, res) => {
     }, (err, purc) => {
         if (purc && purc.booktitle === booktitle) {
             dbo.collection("purchase").updateOne({
-                booktitle: booktitle
+                booktitle: booktitle,
+                username: username
             }, {
                 $set: {
-                    qty: purc.qty + 1
+                    qty: +purc.qty + 1
                 }
             })
             dbo.collection("book-data").updateOne({
-                booktitle: booktitle
+                booktitle: booktitle,
             }, {
                 $set: {
-                    qty: qty - 1
+                    qty: +qty - 1
                 }
             })
             res.send(JSON.stringify({
@@ -216,7 +217,7 @@ app.post("/addcart", upload.none(), (req, res) => {
             booktitle: booktitle
         }, {
             $set: {
-                qty: qty - 1
+                qty: +qty - 1
             }
         })
         res.send(JSON.stringify({
@@ -286,10 +287,45 @@ app.post("/updatepurchase", upload.none(), (req, res) => {
     }, (err, purc) => {
         if (purc && purc.booktitle === booktitle) {
             dbo.collection("purchase").updateOne({
-                booktitle: booktitle
+                booktitle: booktitle,
+                username: username
             }, {
                 $set: {
-                    qty: +qty
+                    qty: +qty + 1
+                }
+            })
+            dbo.collection("book-data").findOne({
+                booktitle
+            }, (err, bdata) => {
+                console.log("bdata quantity" , bdata.qty)
+                dbo.collection("book-data").updateOne({
+                    booktitle: booktitle
+                }, {
+                    $set: {
+                        qty: +bdata.qty - 1
+                    }
+                })
+            })
+
+        }
+    })
+})
+app.post("/decpurchase", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+    let booktitle = req.body.booktitle
+    let qty = req.body.qty
+    dbo.collection("purchase").findOne({
+        username: username,
+        booktitle: booktitle
+    }, (err, purc) => {
+        if (purc && purc.booktitle === booktitle) {
+            dbo.collection("purchase").updateOne({
+                booktitle: booktitle,
+                username: username
+            }, {
+                $set: {
+                    qty: +qty - 1
                 }
             })
             dbo.collection("book-data").findOne({
@@ -299,7 +335,7 @@ app.post("/updatepurchase", upload.none(), (req, res) => {
                     booktitle: booktitle
                 }, {
                     $set: {
-                        qty: bdata.qty - qty
+                        qty: +bdata.qty + 1
                     }
                 })
             })
