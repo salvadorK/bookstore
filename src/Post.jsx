@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { BrowserRouter, Route, Link } from "react-router-dom";//
+import { Link } from "react-router-dom";
 
 import Login from "./Login.jsx";
 class Post extends Component {
@@ -35,7 +35,9 @@ class Post extends Component {
         <div class="container">
           <div class="products-container">
             <product class="card">
-              <img class="img-size" src={this.props.contents.img} />
+              <Link to={"/detail/" + this.props._id}>
+                <img class="img-size" src={this.props.contents.img} />
+              </Link>
               <h3 class="text-primary">{this.props.contents.booktitle}</h3>
               <div>isbn:{this.props.contents.ISBN}</div>
               <div>Quantity:{this.props.contents.qty}</div>
