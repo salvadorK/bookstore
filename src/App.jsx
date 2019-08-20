@@ -9,6 +9,7 @@ import Login from "./Login.jsx";
 import "./main.css";
 import Navbar from "./Navbar.jsx";
 import Spopup from "./Spopup.jsx";
+import Detail from "./Detail.jsx";
 
 import StripeCheckout from "react-stripe-checkout";
 import Cartlist from "./cart-list.jsx";
