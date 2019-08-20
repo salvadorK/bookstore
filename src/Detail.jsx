@@ -2,7 +2,7 @@ import "./main.css";
 import React, { Component } from "react";
 // import {Link} from "react-router-dom";
 
-class Details extends Component {
+class Detail extends Component {
   render() {
     return (
       <div>

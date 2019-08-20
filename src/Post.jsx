@@ -35,7 +35,7 @@ class Post extends Component {
         <div class="container">
           <div class="products-container">
             <product class="card">
-              <Link to={"/detail/" + this.props._id}>
+              <Link to={"/detail/" + this.props.contents._id}>
                 <img class="img-size" src={this.props.contents.img} />
               </Link>
               <h3 class="text-primary">{this.props.contents.booktitle}</h3>

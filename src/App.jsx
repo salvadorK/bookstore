@@ -125,7 +125,7 @@ class UnconnectedApp extends Component {
 
     let renderDetail = rd => {
       let detailId = rd.match.params.did;
-      let candetails = this.state.post.filter(details => {
+      let candetails = this.state.posts.filter(details => {
         return details._id === detailId;
       });
       return <Detail detail={candetails[0]} />;
