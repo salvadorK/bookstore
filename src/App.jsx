@@ -95,7 +95,7 @@ class UnconnectedApp extends Component {
             <nav class="navbar">
               <div class="container">
                 <h1 class="logo">
-                  <a href="#">Bookstore</a>
+                  <a href="#">Le Bookstore</a>
                 </h1>
 
                 <ul>
@@ -135,16 +135,15 @@ class UnconnectedApp extends Component {
                     </h1>
                     <p class="lead">
                       Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Cum quaerat quae natus distinctio corrupti cupiditate
-                      architecto, voluptatem ratione temporibus reiciendis!
+                      Cum quaerat quae natus distinctio corrupti cupiditate!
                     </p>
-                    <a
+                    {/* <a
                       href="articles.html"
                       class="btn
                   btn-primary"
                     >
                       More details
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </div>

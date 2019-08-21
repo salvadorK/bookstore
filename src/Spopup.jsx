@@ -15,13 +15,19 @@ class UnconnectedSpopup extends React.Component {
     this.setState({ ShowingSignup: true });
   };
 
+  CloseSignup = () => {
+    this.setState({ ShowingSignup: false });
+  };
   render() {
     return (
       <div class="spopup">
         <div class="spopup-inner">
           <h1>{this.props.text}</h1>
           {this.state.ShowingSignup ? (
-            <Signup closePopup={this.props.closePopup} />
+            <Signup
+              close={this.CloseSignup}
+              closePopup={this.props.closePopup}
+            />
           ) : (
             <Login open={this.ShowSignup} closePopup={this.props.closePopup} />
           )}
