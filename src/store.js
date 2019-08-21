@@ -8,10 +8,16 @@ let reducer = function (state, action) {
             searchQuery: action.q
         }
     }
-    if (action.type === "login-success") {
+    if (action.type === "login") {
         return {
             ...state,
-            loggedIn: action.loggedIn
+            username: action.username
+        }
+    }
+    if (action.type === "logout") {
+        return {
+            ...state,
+            username: ""
         }
     }
     if (action.type === "totalqty") {
@@ -27,7 +33,7 @@ let reducer = function (state, action) {
 const store = createStore(
     reducer, {
         searchQuery: "",
-        loggedIn: "",
+        username: "",
         totalqty: ""
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

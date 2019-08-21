@@ -37,7 +37,9 @@ class Post extends Component {
         <div class="container">
           <div class="products-container">
             <product class="card">
-              {this.state.showSpop ? <Spopup /> : null}
+              {this.state.showSpop ? (
+                <Spopup closePopup={this.props.closePopup} />
+              ) : null}
               <Link to={"/detail/" + this.props.contents._id}>
                 <img class="img-size" src={this.props.contents.img} />
               </Link>

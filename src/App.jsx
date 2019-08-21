@@ -12,6 +12,7 @@ import Spopup from "./Spopup.jsx";
 import Detail from "./Detail.jsx";
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { METHODS } from "http";
 
 class UnconnectedApp extends Component {
   constructor() {
@@ -33,10 +34,20 @@ class UnconnectedApp extends Component {
     console.log(body.username);
     if (body.success) {
       this.props.dispatch({
-        type: "login-success",
-        loggedIn: body.username
+        type: "login",
+        username: body.username
       });
+      this.reload();
       return;
+    }
+  }
+  async logout() {
+    let response = await fetch("/logout");
+    let body = JSON.parse(await response.text());
+    if (body.success) {
+      this.props.dispatch({
+        type: "logout"
+      });
     }
   }
   togglePopup() {
@@ -51,13 +62,13 @@ class UnconnectedApp extends Component {
   }
 
   selltoggle = () => {
-    this.props.loggedIn !== ""
+    this.props.username !== ""
       ? this.setState({ showBuy: false })
       : this.togglePopup();
   };
 
   buytoggle = () => {
-    this.props.loggedIn !== ""
+    this.props.username !== ""
       ? this.setState({ showBuy: true })
       : this.togglePopup();
   };
@@ -70,7 +81,7 @@ class UnconnectedApp extends Component {
   };
 
   newpost = () => {
-    this.props.loggedIn !== ""
+    this.props.username !== ""
       ? this.setState({ newpost: !this.state.newpost })
       : this.togglePopup;
   };
@@ -88,6 +99,7 @@ class UnconnectedApp extends Component {
                 </h1>
 
                 <ul>
+                  <li>{showSignOut}</li>
                   <li>
                     <h2 class="search" />
                     <Search />
@@ -150,7 +162,7 @@ class UnconnectedApp extends Component {
 
             <div class="container-img">
               {results.map(p => (
-                <Post contents={p} />
+                <Post contents={p} closePopup={this.togglePopup.bind(this)} />
               ))}
             </div>
           </div>
@@ -167,7 +179,7 @@ class UnconnectedApp extends Component {
     };
 
     let showsellbutt =
-      this.props.loggedIn !== "" ? (
+      this.props.username !== "" ? (
         <div>
           <button class="btn" onClick={this.newpost.bind(this)}>
             Sell one?
@@ -176,16 +188,23 @@ class UnconnectedApp extends Component {
         </div>
       ) : null;
 
+    let showSignOut =
+      this.props.username !== "" ? (
+        <button class="btn" onClick={this.logout.bind(this)}>
+          Sign Out
+        </button>
+      ) : null;
+
     let seller = this.state.showBuy
       ? this.state.posts.filter(user => {
-          return user.username !== this.props.loggedIn;
+          return user.username !== this.props.username;
         })
       : this.state.posts.filter(user => {
-          return user.username === this.props.loggedIn;
+          return user.username === this.props.username;
         });
 
     let results =
-      this.props.loggedIn !== ""
+      this.props.username !== ""
         ? seller.filter(item => {
             return item.booktitle
               .toLowerCase()
@@ -209,7 +228,7 @@ class UnconnectedApp extends Component {
 let mapStateToProps = st => {
   return {
     query: st.searchQuery,
-    loggedIn: st.loggedIn,
+    username: st.username,
     totalqty: st.totalqty
   };
 };

@@ -379,6 +379,15 @@ app.post("/makeReview", upload.none(), (req, res) => {
     })
 })
 
+app.get("/logout", (req, res) => {
+    let sessionId = req.cookies.sid
+    delete sessions[sessionId]
+    console.log(sessions)
+    res.send(JSON.stringify({
+        success: true
+    }))
+})
+
 app.all("/*", (req, res, next) => {
     // needed for react router
     res.sendFile(__dirname + "/build/index.html");
