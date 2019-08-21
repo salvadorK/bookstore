@@ -23,7 +23,8 @@ class UnconnectedApp extends Component {
       posts: [],
       showPopup: false,
       showCart: false,
-      showBuy: false
+      showBuy: false,
+      newpost: false
     };
   }
   async componentDidMount() {
@@ -68,6 +69,12 @@ class UnconnectedApp extends Component {
     this.setState({ posts: body });
   };
 
+  newpost = () => {
+    this.props.loggedIn !== ""
+      ? this.setState({ newpost: !this.state.newpost })
+      : this.togglePopup;
+  };
+
   render = () => {
     this.reload();
     let renderAllitems = () => {
@@ -101,6 +108,7 @@ class UnconnectedApp extends Component {
                     </button>
                     {this.props.totalqty}
                   </li>
+                  <li>{showsellbutt}</li>
                 </ul>
               </div>
             </nav>
@@ -154,8 +162,19 @@ class UnconnectedApp extends Component {
       let candetails = this.state.posts.filter(details => {
         return details._id === detailId;
       });
+      console.log(candetails);
       return <Detail detail={candetails[0]} />;
     };
+
+    let showsellbutt =
+      this.props.loggedIn !== "" ? (
+        <div>
+          <button class="btn" onClick={this.newpost.bind(this)}>
+            Sell one?
+          </button>
+          {this.state.newpost ? <NewPost /> : null}
+        </div>
+      ) : null;
 
     let seller = this.state.showBuy
       ? this.state.posts.filter(user => {
