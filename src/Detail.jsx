@@ -23,7 +23,7 @@ class Detail extends Component {
   render() {
     console.log(this.props.detail.booktitle);
     return (
-      <div>
+      <div id="detailpage">
         <div>{/* <img src={this.props.detail.img} /> */}</div>
         <div>{this.props.detail.booktitle}</div>
         <div>{this.props.detail.ISBN}</div>

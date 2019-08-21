@@ -26,7 +26,7 @@ export default class Cartlist extends Component {
   };
   render = () => {
     return (
-      <div className="item">
+      <div id="CartItem">
         <div className="image">
           <img src={this.props.contents.img} height="10px" width="10px" />
           <div className="flex">
