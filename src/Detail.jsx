@@ -21,6 +21,7 @@ class Detail extends Component {
     fetch("/makeReview", { method: "POST", body: data });
   };
   render() {
+    console.log(this.props.detail.booktitle);
     return (
       <div>
         <div>{/* <img src={this.props.detail.img} /> */}</div>
@@ -30,6 +31,15 @@ class Detail extends Component {
         <div>{this.props.detail.price}</div>
         <div>{this.props.detail.description}</div>
         <div>{this.props.detail.username}</div>
+        <div>
+          {this.props.detail.reviews.map(x => {
+            return (
+              <div>
+                {x.username}:{x.reviews}
+              </div>
+            );
+          })}
+        </div>
         <button class="btn" onClick={this.makeReview}>
           {" "}
           Make a review

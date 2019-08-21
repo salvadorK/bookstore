@@ -29,19 +29,19 @@ export default class Cartlist extends Component {
       <div className="item">
         <div className="image">
           <img src={this.props.contents.img} height="10px" width="10px" />
-          <div>
+          <div className="flex">
             <h4>{this.props.contents.booktitle}</h4>
 
-            <div>
+            <div className="flex">
               <button onClick={this.incquantity}>+</button>
               <input type="text" value={this.state.qty} />
               <button onClick={this.decquantity}>-</button>
             </div>
           </div>
-          <div>
+          <div className="flex">
             <h4>CAD ${+this.props.contents.price * this.state.qty}</h4>
           </div>
-          <div>
+          <div className="flex">
             <form>
               <input type="button" onClick={this.deleteOne} value="delete" />
             </form>

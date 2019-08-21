@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Spopup from "./Spopup.jsx";
 
 import Login from "./Login.jsx";
 class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      showSpop: false
     };
   }
   addcart = async () => {
@@ -21,7 +23,7 @@ class Post extends Component {
     let text = JSON.parse(responsebody);
     console.log(text.success);
     if (!text.success) {
-      alert("please login");
+      this.setState({ showSpop: true });
       return;
     }
     alert("added to cart");
@@ -35,6 +37,7 @@ class Post extends Component {
         <div class="container">
           <div class="products-container">
             <product class="card">
+              {this.state.showSpop ? <Spopup /> : null}
               <Link to={"/detail/" + this.props.contents._id}>
                 <img class="img-size" src={this.props.contents.img} />
               </Link>

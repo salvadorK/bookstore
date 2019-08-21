@@ -211,7 +211,8 @@ app.post("/addcart", upload.none(), (req, res) => {
             img,
             price: +price,
             qty: 1,
-            DOP: dop
+            DOP: dop,
+            reviews: []
         })
         dbo.collection("book-data").updateOne({
             booktitle: booktitle
