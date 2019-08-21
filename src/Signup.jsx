@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Login from "./Login.jsx";
-class Signup extends Component {
+import { connect } from "react-redux";
+
+class UnconnectedSignup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,14 +14,14 @@ class Signup extends Component {
     };
   }
 
-  firstnameChangeHandler = e => {
-    this.setState({ firstname: e.target.value });
+  firstnameChangeHandler = event => {
+    this.setState({ firstname: event.target.value });
   };
-  lastnameChangeHandler = e => {
-    this.setState({ lastname: e.target.value });
+  lastnameChangeHandler = event => {
+    this.setState({ lastname: event.target.value });
   };
-  phoneChangeHandler = e => {
-    this.setState({ phone: e.target.value });
+  phoneChangeHandler = event => {
+    this.setState({ phone: event.target.value });
   };
 
   handleEmailChange = event => {
@@ -53,53 +55,40 @@ class Signup extends Component {
 
   render = () => {
     return (
-      <div class="popup">
+      <div id="popup">
         <form class="registration-form" onSubmit={this.handleSignSubmit}>
           {/* First Name */}
-          <div>
-            <input
-              type="text"
-              placeholder="First Name"
-              onChange={this.firstnameChangeHandler}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="First Name"
+            onChange={this.firstnameChangeHandler}
+          />
           {/* Last Name */}
-          <div>
-            <input
-              type="text"
-              placeholder="Last Name"
-              onChange={this.lastnameChangeHandler}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Last Name"
+            onChange={this.lastnameChangeHandler}
+          />
           {/* Phone */}
-          <div>
-            <input
-              type="text"
-              placeholder="Phone"
-              onChange={this.phoneChangeHandler}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Phone"
+            onChange={this.phoneChangeHandler}
+          />
           {/* Username */}
-          <div>
-            <input
-              type="text"
-              placeholder="Email"
-              onChange={this.handleEmailChange}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Email"
+            onChange={this.handleEmailChange}
+          />
           {/* Password */}
-          <div>
-            <input
-              type="text"
-              placeholder="Password"
-              onChange={this.handlePasswordChange}
-            />
-          </div>
-          <div class="submit-button">
-            <input type="submit" value="signup" />
-          </div>
+          <input
+            type="text"
+            placeholder="Password"
+            onChange={this.handlePasswordChange}
+          />
+          <input class="submit-button" type="submit" value="signup" />
           <p class="message">
-            {" "}
             Already Registered? <a href="#">Login</a>
           </p>
         </form>
@@ -107,4 +96,5 @@ class Signup extends Component {
     );
   };
 }
+let Signup = connect()(UnconnectedSignup);
 export default Signup;
