@@ -297,7 +297,7 @@ app.post("/updatepurchase", upload.none(), (req, res) => {
             dbo.collection("book-data").findOne({
                 booktitle
             }, (err, bdata) => {
-                console.log("bdata quantity" , bdata.qty)
+                console.log("bdata quantity", bdata.qty)
                 dbo.collection("book-data").updateOne({
                     booktitle: booktitle
                 }, {
@@ -361,7 +361,22 @@ app.post("/clear", upload.none(), (req, res) => {
         username
     })
 })
-
+app.post("/makeReview", upload.none(), (req, res) => {
+    let sessionId = req.cookies.sid
+    let username = sessions[sessionId]
+    let reviews = req.body.reviews
+    let booktitle = req.body.booktitle
+    dbo.collection("book-data").update({
+        booktitle: booktitle
+    }, {
+        $push: {
+            reviews: {
+                username: username,
+                reviews: reviews
+            }
+        }
+    })
+})
 
 app.all("/*", (req, res, next) => {
     // needed for react router
