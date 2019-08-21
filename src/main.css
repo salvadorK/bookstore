@@ -92,15 +92,14 @@ body {
   color: #f1eeee;
 }
 
-.registration-form {
-  display: none;
+#popup .registration-form {
+  display: "none";
 }
 
-.registration-form .flip {
+/* .registration-form .flip {
   color: white;
   z-index: 15;
-}
-
+} */
 .spopup-inner {
   position: absolute;
   left: 25%;

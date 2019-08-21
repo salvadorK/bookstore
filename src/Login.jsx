@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 class UnconnectedLogin extends Component {
   constructor(props) {
     super(props);
@@ -8,6 +9,12 @@ class UnconnectedLogin extends Component {
       password: ""
     };
   }
+
+  // toggle = () => {
+  //   document.getElementsByClassName("registration-form").style.display =
+  //     "block";
+  // };
+
   handleUsernameChange = event => {
     console.log("new username", event.target.value);
     this.setState({ username: event.target.value });
@@ -60,11 +67,9 @@ class UnconnectedLogin extends Component {
             onChange={this.handlePasswordChange}
           />
           <input class="submit-button" type="submit" value="login" />
-          <p class="message">
-            Not Registered yet?
-            <button class="test-button" type="submit" value="test" />
-          </p>
+          <p class="message">Not Registered yet?</p>
         </form>
+        <button onClick={this.props.open}>Signup</button>
       </div>
     );
   };
