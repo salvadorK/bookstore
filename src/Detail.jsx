@@ -6,9 +6,7 @@ class Detail extends Component {
   render() {
     return (
       <div>
-        <div>
-          <img src={this.props.detail.img} />
-        </div>
+        <div>{this.props.detail.img}</div>
         <div>{this.props.detail.booktitle}</div>
         <div>{this.props.detail.ISBN}</div>
         <div>{this.props.detail.qty}</div>
