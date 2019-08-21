@@ -2,26 +2,34 @@ import React from "react";
 import "./main.css";
 import Signup from "./Signup.jsx";
 import Login from "./Login.jsx";
+import { connect } from "react-redux";
 
-class Spopup extends React.Component {
+class UnconnectedSpopup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ShowingSignup: false
+    };
+  }
+  ShowSignup = () => {
+    this.setState({ ShowingSignup: true });
+  };
+
   render() {
     return (
       <div class="spopup">
         <div class="spopup-inner">
           <h1>{this.props.text}</h1>
-          <Signup closePopup={this.props.closePopup} />
-          <Login closePopup={this.props.closePopup} />
+          {this.state.ShowingSignup ? (
+            <Signup closePopup={this.props.closePopup} />
+          ) : (
+            <Login open={this.ShowSignup} closePopup={this.props.closePopup} />
+          )}
         </div>
-        {/* document.getElementByClassName(registration-form).style ="block"
-         */}
-        {/* <script src="https://code.jquery.com/jquery-3.2.1.js" />
-        <script>
-          $(''.message a').click(function()
-          {"form".animate({ height: "toggle", opacity: "toggle" }, "slow")})
-        </script>
-        } */}
       </div>
     );
   }
 }
+
+let Spopup = connect()(UnconnectedSpopup);
 export default Spopup;

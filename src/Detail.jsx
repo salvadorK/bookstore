@@ -5,8 +5,8 @@ import React, { Component } from "react";
 class Detail extends Component {
   render() {
     return (
-      <div>
-        <div>{this.props.detail.img}</div>
+      <div class="">
+        <div class="img-size"> {this.props.detail.img}</div>
         <div>{this.props.detail.booktitle}</div>
         <div>{this.props.detail.ISBN}</div>
         <div>{this.props.detail.qty}</div>
