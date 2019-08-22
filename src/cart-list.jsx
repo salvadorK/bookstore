@@ -27,26 +27,30 @@ export default class Cartlist extends Component {
   render = () => {
     return (
       <div id="CartItem">
-        <div className="image">
-          <img src={this.props.contents.img} height="10px" width="10px" />
-          <div className="flex">
-            <h4>{this.props.contents.booktitle}</h4>
+        <ul className="image-frame">
+          <li>
+            <img className="imagecart" src={this.props.contents.img} />
+            <li className="titleCart">
+              <h4>{this.props.contents.booktitle}</h4>
+            </li>
 
-            <div className="flex">
-              <button onClick={this.incquantity}>+</button>
+            <li className="quantitycart">
               <input type="text" value={this.state.qty} />
+              <button onClick={this.incquantity}>+</button>
               <button onClick={this.decquantity}>-</button>
-            </div>
-          </div>
-          <div className="flex">
-            <h4>CAD ${+this.props.contents.price * this.state.qty}</h4>
-          </div>
-          <div className="flex">
-            <form>
-              <input type="button" onClick={this.deleteOne} value="delete" />
-            </form>
-          </div>
-        </div>
+            </li>
+
+            <li className="pricecart">
+              <h4>CAD ${+this.props.contents.price * this.state.qty}</h4>
+            </li>
+            <li className="deletecart" />
+            <li>
+              <form>
+                <input type="button" onClick={this.deleteOne} value="delete" />
+              </form>
+            </li>
+          </li>
+        </ul>
       </div>
     );
   };

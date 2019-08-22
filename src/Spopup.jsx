@@ -20,8 +20,8 @@ class UnconnectedSpopup extends React.Component {
   };
   render() {
     return (
-      <div class="spopup">
-        <div class="spopup-inner">
+      <div className="spopup">
+        <div className="spopup-inner">
           <h1>{this.props.text}</h1>
           {this.state.ShowingSignup ? (
             <Signup

@@ -93,30 +93,36 @@ class UnconnectedApp extends Component {
       return (
         <div id="signup">
           <div>
-            <nav class="navbar">
-              <div class="container">
-                <h1 class="logo">
-                  <Link to={"/"}>Le Bookstore</Link>
+            <nav className="navbar">
+              <div className="container">
+                <h1 className="logo">
+                  <a href="#">Le Bookstore</a>
                 </h1>
 
                 <ul>
                   <li>{showSignOut}</li>
                   <li>
-                    <h2 class="search" />
+                    <h2 className="search" />
                     <Search />
                   </li>
                   <li>
-                    <button class="btn" onClick={this.buytoggle.bind(this)}>
+                    <button className="btn" onClick={this.buytoggle.bind(this)}>
                       Buy
                     </button>
                   </li>
                   <li>
-                    <button class="btn" onClick={this.selltoggle.bind(this)}>
+                    <button
+                      className="btn"
+                      onClick={this.selltoggle.bind(this)}
+                    >
                       Sell
                     </button>
                   </li>
                   <li>
-                    <button class="btn" onClick={this.carttoggle.bind(this)}>
+                    <button
+                      className="btn"
+                      onClick={this.carttoggle.bind(this)}
+                    >
                       Cart
                     </button>
                     {this.props.username !== "" ? 0 : this.props.totalqty}
@@ -127,20 +133,21 @@ class UnconnectedApp extends Component {
             </nav>
 
             <header id="showcase">
-              <div class="container">
-                <div class="showcase-container">
-                  <div class="showcase-content">
-                    <div class="category-kids">Kids</div>
+              <div className="container">
+                <div className="showcase-container">
+                  <div className="showcase-content">
+                    <div className="category-kids">Kids</div>
                     <h1>
-                      <span class="text-primary">BOOKS</span> FOR NEW BEGINNINGS
+                      <span className="text-primary">BOOKS</span> FOR NEW
+                      BEGINNINGS
                     </h1>
-                    <p class="lead">
+                    <p className="lead">
                       Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                       Cum quaerat quae natus distinctio corrupti cupiditate!
                     </p>
                     {/* <a
                       href="articles.html"
-                      class="btn
+                      className="btn
                   btn-primary"
                     >
                       More details
@@ -160,9 +167,14 @@ class UnconnectedApp extends Component {
               ) : null}
             </div>
 
-            <div class="container-img">
+            <div className="container-img">
               {results.map(p => (
-                <Post contents={p} closePopup={this.togglePopup.bind(this)} />
+                <Post
+                  key={p._id}
+                  contents={p}
+                  openPopup={this.togglePopup.bind(this)}
+                  closePopup={this.togglePopup.bind(this)}
+                />
               ))}
             </div>
           </div>
@@ -181,7 +193,7 @@ class UnconnectedApp extends Component {
     let showsellbutt =
       this.props.username !== "" ? (
         <div>
-          <button class="btn" onClick={this.newpost.bind(this)}>
+          <button className="btn" onClick={this.newpost.bind(this)}>
             Sell one?
           </button>
           {this.state.newpost ? <NewPost /> : null}
@@ -190,7 +202,7 @@ class UnconnectedApp extends Component {
 
     let showSignOut =
       this.props.username !== "" ? (
-        <button class="btn" onClick={this.logout.bind(this)}>
+        <button className="btn" onClick={this.logout.bind(this)}>
           Sign Out
         </button>
       ) : null;

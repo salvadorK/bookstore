@@ -7,8 +7,8 @@ import Login from "./Login.jsx";
 //   render = () => {
 //     return (
 //       <nav id="navbar">
-//         <div class="container">
-//           <h1 class="logo">
+//         <div className="container">
+//           <h1 className="logo">
 //             <a href="index.html">Bookstore</a>
 //           </h1>
 

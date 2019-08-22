@@ -23,7 +23,8 @@ class Post extends Component {
     let text = JSON.parse(responsebody);
     console.log(text.success);
     if (!text.success) {
-      this.setState({ showSpop: true });
+      // this.setState({ showSpop: true });
+      this.props.openPopup();
       return;
     }
     alert("added to cart");
@@ -31,17 +32,17 @@ class Post extends Component {
 
   render = () => {
     return (
-      <section id="kids-books" class="py-2">
+      <section id="kids-books" className="py-2">
         {/* <h2>Employee Picks</h2> */}
 
-        <div class="container">
-          <div class="products-container">
-            <product class="card">
-              {this.state.showSpop ? (
+        <div className="container">
+          <div className="products-container">
+            <div className="card">
+              {/* {this.state.showSpop ? (
                 <Spopup closePopup={this.props.closePopup} />
-              ) : null}
+              ) : null} */}
               <Link to={"/detail/" + this.props.contents._id}>
-                <img class="img-size" src={this.props.contents.img} />
+                <img className="img-size" src={this.props.contents.img} />
               </Link>
               <h3 class="text-primary">{this.props.contents.booktitle}</h3>
               <div>isbn:{this.props.contents.isbn}</div>
@@ -56,7 +57,7 @@ class Post extends Component {
               >
                 <img src="public/cart.png" />
               </button>
-            </product>
+            </div>
           </div>
         </div>
       </section>
