@@ -24,6 +24,12 @@ class Detail extends Component {
     console.log(this.props.detail.booktitle);
     return (
       <div id="detailpage">
+        <div>
+          <Link className="text-primary" to={"/"}>
+            {" "}
+            Back{" "}
+          </Link>
+        </div>
         <div className="container">
           <div className="page-container">
             <div className="card">
@@ -44,9 +50,7 @@ class Detail extends Component {
           </div>
         </div>
         <div>Username:{this.props.detail.username}</div>
-        <div>
-          <Link to={"/"}> Back </Link>
-        </div>
+
         <div>
           {this.props.detail.reviews.map(x => {
             return (

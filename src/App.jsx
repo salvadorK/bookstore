@@ -125,9 +125,8 @@ class UnconnectedApp extends Component {
                     >
                       Cart
                     </button>
-                    {/* <li className="text-primary">{this.props.totalqty}</li> */}
-                    <li>
-                      {" "}
+
+                    <li className="text-primary">
                       {this.props.username !== "" ? 0 : this.props.totalqty}
                     </li>
                   </li>
