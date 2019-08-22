@@ -44,7 +44,7 @@ class Post extends Component {
                 <img class="img-size" src={this.props.contents.img} />
               </Link>
               <h3 class="text-primary">{this.props.contents.booktitle}</h3>
-              <div>isbn:{this.props.contents.ISBN}</div>
+              <div>isbn:{this.props.contents.isbn}</div>
               <div>Quantity:{this.props.contents.qty}</div>
               <div>Price:{this.props.contents.price}</div>
               <button

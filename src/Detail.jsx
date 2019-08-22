@@ -1,6 +1,6 @@
 import "./main.css";
 import React, { Component } from "react";
-// import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Detail extends Component {
   constructor() {
@@ -31,6 +31,9 @@ class Detail extends Component {
         <div>{this.props.detail.price}</div>
         <div>{this.props.detail.description}</div>
         <div>{this.props.detail.username}</div>
+        <div>
+          <Link to={"/"}> Back </Link>
+        </div>
         <div>
           {this.props.detail.reviews.map(x => {
             return (

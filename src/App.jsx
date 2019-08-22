@@ -87,6 +87,7 @@ class UnconnectedApp extends Component {
   };
 
   render = () => {
+    console.log(this.props.totalqty, this.props.username);
     this.reload();
     let renderAllitems = () => {
       return (
@@ -95,7 +96,7 @@ class UnconnectedApp extends Component {
             <nav class="navbar">
               <div class="container">
                 <h1 class="logo">
-                  <a href="#">Le Bookstore</a>
+                  <Link to={"/"}>Le Bookstore</Link>
                 </h1>
 
                 <ul>
@@ -118,7 +119,7 @@ class UnconnectedApp extends Component {
                     <button class="btn" onClick={this.carttoggle.bind(this)}>
                       Cart
                     </button>
-                    {this.props.totalqty}
+                    {this.props.username !== "" ? 0 : this.props.totalqty}
                   </li>
                   <li>{showsellbutt}</li>
                 </ul>
