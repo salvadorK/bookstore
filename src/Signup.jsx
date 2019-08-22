@@ -90,7 +90,7 @@ class UnconnectedSignup extends Component {
           <input className="submit-button" type="submit" value="signup" />
           <p className="message">Already Registered?</p>
         </form>
-        <button onClick={this.props.close}>Signin</button>
+        <button className="btnLogin" onClick={this.props.close}>Login</button>
       </div>
     );
   };

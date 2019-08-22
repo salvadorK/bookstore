@@ -69,7 +69,7 @@ class unconnectedCart extends Component {
       <div className="shopping-cart">
         <div className="scart">
           <div>{results}</div>
-          <div>Total is ${numArr}</div>
+          <div>Total is: ${numArr}</div>
           <div>Total items: {totalqty}</div>
           <div>
             <form>
