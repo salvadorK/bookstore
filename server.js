@@ -261,7 +261,7 @@ app.get("/user-prepurchase", (req, res) => {
                 res.send(JSON.stringify(books))
                 return
             }
-            res.send(JSON.stringify(false))
+            res.send([])
         })
     // .findOne({
     //     username
@@ -292,7 +292,7 @@ app.post("/updatepurchase", upload.none(), (req, res) => {
                 username: username
             }, {
                 $set: {
-                    qty: +qty + 1
+                    qty: +qty
                 }
             })
             dbo.collection("book-data").findOne({
@@ -326,7 +326,7 @@ app.post("/decpurchase", upload.none(), (req, res) => {
                 username: username
             }, {
                 $set: {
-                    qty: +qty - 1
+                    qty: +qty
                 }
             })
             dbo.collection("book-data").findOne({

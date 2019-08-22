@@ -23,7 +23,13 @@ let reducer = function (state, action) {
     if (action.type === "totalqty") {
         return {
             ...state,
-            totalqty: action.totalquantity
+            totalqty: +action.totalquantity
+        }
+    }
+    if (action.type === "userpurchase") {
+        return {
+            ...state,
+            upurc: action.upurc
         }
     }
 
@@ -34,7 +40,8 @@ const store = createStore(
     reducer, {
         searchQuery: "",
         username: "",
-        totalqty: ""
+        totalqty: 0,
+        upurc: []
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

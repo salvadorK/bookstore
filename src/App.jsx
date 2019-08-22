@@ -38,6 +38,14 @@ class UnconnectedApp extends Component {
         username: body.username
       });
       this.reload();
+      let subresponse = await fetch("/user-prepurchase");
+      let subbody = await subresponse.text();
+      subbody = JSON.parse(subbody);
+      console.log(subbody);
+      this.props.dispatch({
+        type: "userpurchase",
+        upurc: subbody
+      });
       return;
     }
   }
@@ -87,7 +95,6 @@ class UnconnectedApp extends Component {
   };
 
   render = () => {
-    console.log(this.props.totalqty, this.props.username);
     this.reload();
     let renderAllitems = () => {
       return (
@@ -125,7 +132,13 @@ class UnconnectedApp extends Component {
                     >
                       Cart
                     </button>
-                    {this.props.username !== "" ? 0 : this.props.totalqty}
+                    {this.props.upurc.length < 1
+                      ? "0"
+                      : this.props.upurc
+                          .map(p => p.qty)
+                          .reduce(function myFunc(total, num) {
+                            return total + num;
+                          })}
                   </li>
                   <li>{showsellbutt}</li>
                 </ul>
@@ -241,7 +254,8 @@ let mapStateToProps = st => {
   return {
     query: st.searchQuery,
     username: st.username,
-    totalqty: st.totalqty
+    totalqty: st.totalqty,
+    upurc: st.upurc
   };
 };
 

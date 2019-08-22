@@ -5,19 +5,19 @@ export default class Cartlist extends Component {
     super(props);
     this.state = { qty: this.props.contents.qty };
   }
-  incquantity = () => {
-    this.setState({ qty: this.props.contents.qty + 1 });
+  incquantity = e => {
     let data = new FormData();
     data.append("qty", this.state.qty);
     data.append("booktitle", this.props.contents.booktitle);
     fetch("/updatepurchase", { method: "POST", body: data });
+    this.setState({ qty: this.props.contents.qty + 1 });
   };
-  decquantity = () => {
-    this.setState({ qty: this.props.contents.qty - 1 });
+  decquantity = e => {
     let data = new FormData();
     data.append("qty", this.state.qty);
     data.append("booktitle", this.props.contents.booktitle);
     fetch("/decpurchase", { method: "POST", body: data });
+    this.setState({ qty: this.props.contents.qty - 1 });
   };
   deleteOne = e => {
     let data = new FormData();

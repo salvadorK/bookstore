@@ -48,7 +48,7 @@ class UnconnectedLogin extends Component {
     bodypurc = JSON.parse(bodypurc);
     let totalqty =
       bodypurc.length < 1
-        ? "0"
+        ? 0
         : bodypurc
             .map(p => p.qty)
             .reduce(function myFunc(total, num) {
