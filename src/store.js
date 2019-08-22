@@ -17,7 +17,9 @@ let reducer = function (state, action) {
     if (action.type === "logout") {
         return {
             ...state,
-            username: ""
+            username: "",
+            totalqty: 0,
+            upurc: []
         }
     }
     if (action.type === "totalqty") {

@@ -103,7 +103,7 @@ class UnconnectedApp extends Component {
             <nav className="navbar">
               <div className="container">
                 <h1 className="logo">
-                  <a href="#">Le Bookstore</a>
+                  <Link to={"/"}>Le Bookstore</Link>
                 </h1>
 
                 <ul>
@@ -132,16 +132,15 @@ class UnconnectedApp extends Component {
                     >
                       Cart
                     </button>
-                    
 
                     <li className="text-primary">
-                    {this.props.upurc.length < 1
-                      ? "0"
-                      : this.props.upurc
-                          .map(p => p.qty)
-                          .reduce(function myFunc(total, num) {
-                            return total + num;
-                          })}
+                      {this.props.upurc.length < 1
+                        ? "0"
+                        : this.props.upurc
+                            .map(p => p.qty)
+                            .reduce(function myFunc(total, num) {
+                              return total + num;
+                            })}
                     </li>
                   </li>
                   <li>{showsellbutt}</li>

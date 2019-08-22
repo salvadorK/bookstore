@@ -10,8 +10,16 @@ class unconnectedCart extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ posts: this.props.upurc });
+    let subresponse = await fetch("/user-prepurchase");
+    let subbody = await subresponse.text();
+    subbody = JSON.parse(subbody);
+    console.log(subbody);
+    this.props.dispatch({
+      type: "userpurchase",
+      upurc: subbody
+    });
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.posts !== this.state.posts) {
@@ -51,7 +59,6 @@ class unconnectedCart extends Component {
     }
     let totalqty =
       state.length < 1 ? "0" : state.map(p => p.qty).reduce(myFunc);
-    console.log(this.props.upurc);
     return (
       <div className="shopping-cart">
         <div className="scart">
@@ -59,9 +66,11 @@ class unconnectedCart extends Component {
           <div>Total is: ${numArr}</div>
           <div>Total items: {totalqty}</div>
           <div>
-            <form>
-              <input type="button" onClick={this.clear} value="clear cart" />
-            </form>
+          
+              <button className="btn-cart" onClick={this.clear}>
+                clear
+              </button>
+            
           </div>
           <StripeCheckout
             token={this.onToken}

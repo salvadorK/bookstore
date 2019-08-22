@@ -58,6 +58,10 @@ class UnconnectedLogin extends Component {
       type: "totalqty",
       totalquantity: totalqty
     });
+    this.props.dispatch({
+      type: "userpurchase",
+      upurc: bodypurc
+    });
     console.log(this.state.username);
     this.props.closePopup();
     this.props.dispatch({

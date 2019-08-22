@@ -7,7 +7,7 @@
 body {
   /* background-color: rgb(133, 129, 129); */
   line-height: 1.5;
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
 }
 
 .overlay {
@@ -168,6 +168,18 @@ body {
   cursor: pointer;
 }
 
+.btn-cart {
+  display: inline-block;
+  font-size: 18px;
+  color: #333;
+  background: rgb(255, 255, 255, 0.75);
+  padding: 2px 2px;
+  border: 2px;
+  cursor: pointer;
+  margin-bottom: 2%;
+
+}
+
 .btn:hover {
   background: #f89d42;
   color: #444;
@@ -294,7 +306,6 @@ a {
 }
 
 #showcase .showcase-container {
-
   grid-template-columns: repeat(2, 1fr);
   justify-content: center;
   align-items: center;
@@ -343,18 +354,19 @@ a {
 
 .shopping-cart {
   position: fixed;
-  top: 25%;
-  left: 50%;
+  top: 10%;
+  left: 85%;
   transform: translate(-50%, -50%);
   /* top: 59.89px; */
   /* right: 30px; */
   width: 500px;
   height: 100px;
   margin: 20px auto;
+  z-index: 30;
 
   /* background: #ffffff; */
 
-  /* border-radius: 6px; */
+  border-radius: 5px;
 }
 
 .item {
@@ -370,7 +382,7 @@ a {
 #CartItem {
   /* width: 100px;
   height: 100px; */
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255, 0.75);
   float: left;
   padding-top: 100px;
   min-height: 200px;
@@ -387,10 +399,12 @@ a {
 }
 
 .scart {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255, 0.75);
   color: #444;
+
   box-sizing: border-box;
   text-align: center;
+  border-radius: 6px;
 
   padding: 20px;
 }
@@ -449,22 +463,22 @@ textarea {
 }
 
 #detailpage {
-  display: grid;
+  justify-content: center;
   /* grid-template-columns: repeat(2, 1fr); */
   background-color: rgb(253, 250, 250);
   padding-top: 100px;
+  padding-right: 100px;
   text-align: center;
   min-height: 500px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   outline: 1;
   background: #f8f5f5;
   width: 500px;
   height: 650px;
   border: 0;
-  margin: 0 0 15px;
+  margin: auto;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 17px;
 }
 
 /* Inner page grid container */

@@ -49,13 +49,13 @@ class Detail extends Component {
             </div>
           </div>
         </div>
-        <div>Username:{this.props.detail.username}</div>
+        <div>Seller:  "{this.props.detail.username}"</div>
 
         <div>
           {this.props.detail.reviews.map(x => {
             return (
               <div>
-                {x.username}:{x.reviews}
+                {x.username}: <i>"{x.reviews}"</i>
               </div>
             );
           })}

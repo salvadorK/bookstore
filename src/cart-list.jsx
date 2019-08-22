@@ -5,19 +5,35 @@ export default class Cartlist extends Component {
     super(props);
     this.state = { qty: this.props.contents.qty };
   }
-  incquantity = e => {
+  incquantity = async e => {
     let data = new FormData();
     data.append("qty", this.state.qty);
     data.append("booktitle", this.props.contents.booktitle);
     fetch("/updatepurchase", { method: "POST", body: data });
     this.setState({ qty: this.props.contents.qty + 1 });
+    let subresponse = await fetch("/user-prepurchase");
+    let subbody = await subresponse.text();
+    subbody = JSON.parse(subbody);
+    console.log(subbody);
+    this.props.dispatch({
+      type: "userpurchase",
+      upurc: subbody
+    });
   };
-  decquantity = e => {
+  decquantity = async e => {
     let data = new FormData();
     data.append("qty", this.state.qty);
     data.append("booktitle", this.props.contents.booktitle);
     fetch("/decpurchase", { method: "POST", body: data });
     this.setState({ qty: this.props.contents.qty - 1 });
+    let subresponse = await fetch("/user-prepurchase");
+    let subbody = await subresponse.text();
+    subbody = JSON.parse(subbody);
+    console.log(subbody);
+    this.props.dispatch({
+      type: "userpurchase",
+      upurc: subbody
+    });
   };
   deleteOne = e => {
     let data = new FormData();
