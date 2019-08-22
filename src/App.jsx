@@ -132,6 +132,9 @@ class UnconnectedApp extends Component {
                     >
                       Cart
                     </button>
+                    
+
+                    <li className="text-primary">
                     {this.props.upurc.length < 1
                       ? "0"
                       : this.props.upurc
@@ -139,6 +142,7 @@ class UnconnectedApp extends Component {
                           .reduce(function myFunc(total, num) {
                             return total + num;
                           })}
+                    </li>
                   </li>
                   <li>{showsellbutt}</li>
                 </ul>
@@ -149,14 +153,14 @@ class UnconnectedApp extends Component {
               <div className="container">
                 <div className="showcase-container">
                   <div className="showcase-content">
-                    <div className="category-kids">Kids</div>
+                    <div className="category-kids">Lifestyle</div>
                     <h1>
                       <span className="text-primary">BOOKS</span> FOR NEW
                       BEGINNINGS
                     </h1>
                     <p className="lead">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Cum quaerat quae natus distinctio corrupti cupiditate!
+                      Navigate your day-to-day with comfort, style and
+                      convenience.
                     </p>
                     {/* <a
                       href="articles.html"

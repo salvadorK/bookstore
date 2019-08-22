@@ -24,16 +24,33 @@ class Detail extends Component {
     console.log(this.props.detail.booktitle);
     return (
       <div id="detailpage">
-        <div>{/* <img src={this.props.detail.img} /> */}</div>
-        <div>{this.props.detail.booktitle}</div>
-        <div>{this.props.detail.ISBN}</div>
-        <div>{this.props.detail.qty}</div>
-        <div>{this.props.detail.price}</div>
-        <div>{this.props.detail.description}</div>
-        <div>{this.props.detail.username}</div>
         <div>
-          <Link to={"/"}> Back </Link>
+          <Link className="text-primary" to={"/"}>
+            {" "}
+            Back{" "}
+          </Link>
         </div>
+        <div className="container">
+          <div className="page-container">
+            <div className="card">
+              <h2 class="l-heading">About</h2>
+              <img src={this.props.detail.img} />
+              <p>ISBN:{this.props.detail.ISBN}</p>
+              <p>Price:${this.props.detail.price}</p>
+              <p>Quantity:{this.props.detail.qty}</p>
+            </div>
+            <div className="review-bg-primary">
+              Title:<h2>{this.props.detail.booktitle}</h2>
+              <h4>{this.props.detail.description}</h4>
+              <button className="btnreview" onClick={this.makeReview}>
+                {" "}
+                Make a review
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>Username:{this.props.detail.username}</div>
+
         <div>
           {this.props.detail.reviews.map(x => {
             return (
@@ -43,10 +60,6 @@ class Detail extends Component {
             );
           })}
         </div>
-        <button className="btn" onClick={this.makeReview}>
-          {" "}
-          Make a review
-        </button>
 
         {this.state.makeReview ? (
           <div>
@@ -54,8 +67,8 @@ class Detail extends Component {
               <textarea
                 name="description"
                 onChange={this.reviewChngeHandler}
-                cols="50"
-                rows="5"
+                cols="10"
+                rows="2"
               />
               <input type="submit" value="submit" />
             </form>

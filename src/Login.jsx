@@ -82,9 +82,11 @@ class UnconnectedLogin extends Component {
             onChange={this.handlePasswordChange}
           />
           <input className="submit-button" type="submit" value="login" />
-          <p className="message">Not Registered yet?</p>
+          <p className="message">Don't have an account?</p>
         </form>
-        <button onClick={this.props.open}>Signup</button>
+        <button className="btnSignup" onClick={this.props.open}>
+          Create one
+        </button>
       </div>
     );
   };

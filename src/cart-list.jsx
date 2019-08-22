@@ -28,11 +28,12 @@ export default class Cartlist extends Component {
     return (
       <div id="CartItem">
         <ul className="image-frame">
+          <li className="titleCart">
+            <h4>{this.props.contents.booktitle}</h4>
+          </li>
+
           <li>
             <img className="imagecart" src={this.props.contents.img} />
-            <li className="titleCart">
-              <h4>{this.props.contents.booktitle}</h4>
-            </li>
 
             <li className="quantitycart">
               <input type="text" value={this.state.qty} />
@@ -43,6 +44,7 @@ export default class Cartlist extends Component {
             <li className="pricecart">
               <h4>CAD ${+this.props.contents.price * this.state.qty}</h4>
             </li>
+
             <li className="deletecart" />
             <li>
               <form>

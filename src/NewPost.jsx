@@ -43,7 +43,7 @@ export default class NewPost extends Component {
   };
   render() {
     return (
-      <div className="popup">
+      <div id="sellingpopup">
         <form className="AddingToCartForm" onSubmit={this.submitHandler}>
           <div>
             <label for="booktitle">Book Title</label>
@@ -56,12 +56,11 @@ export default class NewPost extends Component {
           </div>
           <div>
             <label for="img">Book Cover Image</label>
-            <br />
             <input type="file" name="img" onChange={this.fileChangeHandler} />
           </div>
           <div>
             <label for="description">Description</label>
-            <br />
+
             <textarea
               name="description"
               onChange={this.descChangeHandler}
@@ -71,7 +70,7 @@ export default class NewPost extends Component {
           </div>
           <div>
             <label for="quantity">Quantity</label>
-            <br />
+
             <input
               type="number"
               name="quantity"
@@ -81,7 +80,7 @@ export default class NewPost extends Component {
           </div>
           <div>
             <label for="price">Price</label>
-            <br />
+
             <input
               type="number"
               name="price"
@@ -92,7 +91,7 @@ export default class NewPost extends Component {
           </div>
           <div>
             <label for="ISBN">ISBN</label>
-            <br />
+
             <input type="text" name="ISBN" onChange={this.isbnChangeHandler} />
           </div>
           <div>
