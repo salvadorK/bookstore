@@ -40,7 +40,7 @@ class Detail extends Component {
             );
           })}
         </div>
-        <button class="btn" onClick={this.makeReview}>
+        <button className="btn" onClick={this.makeReview}>
           {" "}
           Make a review
         </button>

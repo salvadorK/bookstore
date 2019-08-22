@@ -53,7 +53,7 @@ class UnconnectedLogin extends Component {
   render = () => {
     return (
       <div id="popup">
-        <form class="Login-form" onSubmit={this.handleLoginSubmit}>
+        <form className="Login-form" onSubmit={this.handleLoginSubmit}>
           {/* Username */}
           <input
             type="text"
@@ -66,8 +66,8 @@ class UnconnectedLogin extends Component {
             placeholder="Password"
             onChange={this.handlePasswordChange}
           />
-          <input class="submit-button" type="submit" value="login" />
-          <p class="message">Not Registered yet?</p>
+          <input className="submit-button" type="submit" value="login" />
+          <p className="message">Not Registered yet?</p>
         </form>
         <button onClick={this.props.open}>Signup</button>
       </div>

@@ -44,7 +44,7 @@ export default class NewPost extends Component {
   render() {
     return (
       <div className="popup">
-        <form class="AddingToCartForm" onSubmit={this.submitHandler}>
+        <form className="AddingToCartForm" onSubmit={this.submitHandler}>
           <div>
             <label for="booktitle">Book Title</label>
             <br />

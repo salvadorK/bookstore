@@ -11,7 +11,7 @@ class UnconncectedSearch extends Component {
         <input
           type="text"
           placeholder="search..."
-          class="search-box-input"
+          className="search-box-input"
           value={this.props.query}
           onChange={this.handleQuery}
         />

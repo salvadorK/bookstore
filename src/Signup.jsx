@@ -56,7 +56,7 @@ class UnconnectedSignup extends Component {
   render = () => {
     return (
       <div id="popup">
-        <form class="registration-form" onSubmit={this.handleSignSubmit}>
+        <form className="registration-form" onSubmit={this.handleSignSubmit}>
           {/* First Name */}
           <input
             type="text"
@@ -87,8 +87,8 @@ class UnconnectedSignup extends Component {
             placeholder="Password"
             onChange={this.handlePasswordChange}
           />
-          <input class="submit-button" type="submit" value="signup" />
-          <p class="message">Already Registered?</p>
+          <input className="submit-button" type="submit" value="signup" />
+          <p className="message">Already Registered?</p>
         </form>
         <button onClick={this.props.close}>Signin</button>
       </div>
