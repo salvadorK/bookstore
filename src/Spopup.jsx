@@ -26,7 +26,6 @@ class UnconnectedSpopup extends React.Component {
           {this.state.ShowingSignup ? (
             <Signup
               close={this.CloseSignup}
-              closePopup={this.props.closePopup}
             />
           ) : (
             <Login open={this.ShowSignup} closePopup={this.props.closePopup} />

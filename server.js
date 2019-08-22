@@ -120,7 +120,7 @@ app.post("/new-post", upload.single("img"), (req, res) => {
     let description = req.body.description;
     let qty = req.body.qty;
     let price = req.body.price;
-    let ISBN = req.body.isbn;
+    let isbn = req.body.isbn;
     let file = req.file;
     let img = "/uploads/" + file.filename;
     let username = sessions[sessionId];
@@ -128,7 +128,7 @@ app.post("/new-post", upload.single("img"), (req, res) => {
         booktitle,
         description,
         qty,
-        ISBN,
+        isbn,
         username,
         price,
         img

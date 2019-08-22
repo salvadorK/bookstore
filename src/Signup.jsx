@@ -47,7 +47,7 @@ class UnconnectedSignup extends Component {
     let text = JSON.parse(responsebody);
     console.log(text.success);
     if (text.success) {
-      alert("signup successful");
+      this.props.close();
       return;
     }
     alert("username taken");
@@ -77,7 +77,7 @@ class UnconnectedSignup extends Component {
           />
           {/* Username */}
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             onChange={this.handleEmailChange}
           />

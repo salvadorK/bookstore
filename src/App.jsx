@@ -87,6 +87,7 @@ class UnconnectedApp extends Component {
   };
 
   render = () => {
+    console.log(this.props.totalqty, this.props.username);
     this.reload();
     let renderAllitems = () => {
       return (
@@ -124,7 +125,11 @@ class UnconnectedApp extends Component {
                     >
                       Cart
                     </button>
-                    <li className="text-primary">{this.props.totalqty}</li>
+                    {/* <li className="text-primary">{this.props.totalqty}</li> */}
+                    <li>
+                      {" "}
+                      {this.props.username !== "" ? 0 : this.props.totalqty}
+                    </li>
                   </li>
                   <li>{showsellbutt}</li>
                 </ul>

@@ -43,6 +43,21 @@ class UnconnectedLogin extends Component {
       return;
     }
     alert("login - success");
+    let itempurc = await fetch("/user-prepurchase");
+    let bodypurc = await itempurc.text();
+    bodypurc = JSON.parse(bodypurc);
+    let totalqty =
+      bodypurc.length < 1
+        ? "0"
+        : bodypurc
+            .map(p => p.qty)
+            .reduce(function myFunc(total, num) {
+              return total + num;
+            });
+    this.props.dispatch({
+      type: "totalqty",
+      totalquantity: totalqty
+    });
     console.log(this.state.username);
     this.props.closePopup();
     this.props.dispatch({

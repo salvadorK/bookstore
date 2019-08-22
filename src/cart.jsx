@@ -60,10 +60,7 @@ class unconnectedCart extends Component {
     let totalqty = !state[0]
       ? "0"
       : this.state.posts.map(p => p.qty).reduce(myFunc);
-    this.props.dispatch({
-      type: "totalqty",
-      totalquantity: totalqty
-    });
+    
 
     return (
       <div className="shopping-cart">
